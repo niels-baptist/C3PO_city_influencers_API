@@ -1,4 +1,6 @@
 package com.example.bookinfoservice.model;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 
@@ -10,7 +12,7 @@ public class Influencer {
     @Column(name = "\"influencer_id\"")
     private int influencerId;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="userId", nullable=true)
+    @JoinColumn(name="user_id", nullable=true)
     private User user;
     @Column(name = "\"gender\"")
     private String gender;
@@ -32,13 +34,6 @@ public class Influencer {
         this.influencerId = influencer_id;
     }
 
-    public User getUserId() {
-        return user;
-    }
-
-    public void setUserId(User user) {
-        this.user = user;
-    }
 
     public String getGender() {
         return gender;
@@ -46,5 +41,14 @@ public class Influencer {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

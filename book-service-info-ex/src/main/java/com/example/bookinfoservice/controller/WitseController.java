@@ -22,6 +22,10 @@ public class WitseController {
     public Influencer getLocationById(@PathVariable int influencer_id){
         return influencerRepository.findByInfluencerId(influencer_id);
     }
+    @GetMapping("/Influencers")
+    public List<Influencer> getInfluencers(){
+        return influencerRepository.findAll();
+    }
     @GetMapping("/roles/")
     public List<Employee_role> getEmplayee_roles(){
         return employee_roleRepository.findAll();

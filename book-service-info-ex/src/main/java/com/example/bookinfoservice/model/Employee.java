@@ -1,5 +1,7 @@
 package com.example.bookinfoservice.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,17 +11,18 @@ public class Employee {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"employee_id\"")
     private int employeeId;
-    @Column(name = "\"user_id\"")
-    private int userId;
     @Column(name = "\"role_id\"")
     private int roleId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id", nullable=true)
+    private User user;
 
     public Employee() {
     }
 
-    public Employee(int employeeId, int userId, int roleId) {
+    public Employee(int employeeId,User user, int roleId) {
         this.employeeId = employeeId;
-        this.userId = userId;
+        this.user = user;
         this.roleId = roleId;
     }
 
@@ -31,19 +34,19 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
     public int getRoleId() {
         return roleId;
     }
 
     public void setRoleId(int roleId) {
         this.roleId = roleId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

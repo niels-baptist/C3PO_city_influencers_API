@@ -1,4 +1,8 @@
 package com.example.bookinfoservice.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -6,6 +10,7 @@ import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name="location", schema = "nocaps")
+@JsonIgnoreProperties(value = {"users","hibernateLazyInitializer"}, allowSetters = true)
 public class Location {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -16,8 +21,11 @@ public class Location {
     @Column(name = "\"postal_code\"")
     private String postalCode;
 
-    @OneToMany(cascade = ALL,mappedBy = "location")
-    private List<User> Users;
+    @OneToMany(mappedBy = "location",
+            orphanRemoval = true,
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<User> users;
 
     public Location(int locationId, String name, String postalCode) {
         this.locationId = locationId;
@@ -53,10 +61,10 @@ public class Location {
     }
 
     public List<User> getUsers() {
-        return Users;
+        return users;
     }
 
     public void setUsers(List<User> users) {
-        Users = users;
+        this.users = users;
     }
 }

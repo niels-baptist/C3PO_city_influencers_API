@@ -1,16 +1,22 @@
 package com.example.bookinfoservice.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
-
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name="user", schema = "nocaps")
+@JsonIgnoreProperties(value = {"influencer","employee","hibernateLazyInitializer"}, allowSetters = true)
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"user_id\"")
     private int userId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="location_id", nullable=true)
     private Location location;
@@ -25,6 +31,10 @@ public class User {
     @Column(name = "\"birth_date\"")
     private Date birthdate;
 
+    @OneToOne(cascade=ALL,mappedBy = "user")
+    private Influencer influencer;
+    @OneToOne(cascade=ALL,mappedBy = "user")
+    private Employee employee;
 
 
     public User(){}
@@ -93,5 +103,29 @@ public class User {
 
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Influencer getInfluencer() {
+        return influencer;
+    }
+
+    public void setInfluencer(Influencer influencer) {
+        this.influencer = influencer;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
