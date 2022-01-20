@@ -1,10 +1,8 @@
 package com.example.bookinfoservice.controller;
 import com.example.bookinfoservice.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import com.example.bookinfoservice.repository.*;
 
 import java.util.List;
@@ -38,5 +36,19 @@ public class LoginController {
     @GetMapping("/influencers/username/{user_name}")
     public Influencer getInfluencerByUserName(@PathVariable String user_name){
         return influencerRepository.findAllByuserUserName(user_name).stream().findFirst().get();
+    }
+    @PostMapping("/users/register")
+    public User addUser(@RequestBody User user){
+        return userRepository.save(user);
+    }
+    @PostMapping("/influencers/register")
+    public Influencer addInfluencer(@RequestBody Influencer influencer){
+        return influencerRepository.save(influencer);
+    }
+    @RequestMapping(value = "/employees/register", method = RequestMethod.POST,consumes =MediaType.APPLICATION_JSON_VALUE ,
+            headers = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Employee addEmployee(@RequestBody Employee employee){
+        return employeeRepository.save(employee);
     }
 }
