@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="book-info-service" />
+        <module name="book-service-info-ex" />
         <module name="book-info-service-ex" />
       </profile>
     </annotationProcessing>
@@ -15,6 +16,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="book-info-service" options="-parameters" />
       <module name="book-info-service-ex" options="-parameters" />
+      <module name="book-service-info-ex" options="-parameters" />
     </option>
   </component>
 </project>
