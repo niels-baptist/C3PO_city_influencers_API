@@ -19,11 +19,11 @@ public class LocationController {
     }
 
     //Employee
-    @Autowired
+    /*@Autowired
     EmployeeRepository employeeRepository;
     @GetMapping("/employees/")
     public List<Employee> getAllEmployees(){return employeeRepository.findAll();
-    }
+    }*/
 
     //Campaign
     @Autowired

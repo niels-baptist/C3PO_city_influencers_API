@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 public class WitseController {
-    @Autowired
+    /*@Autowired
     InfluencerRepository influencerRepository;
 
     @Autowired
@@ -28,7 +28,7 @@ public class WitseController {
         return influencerRepository.findAll();
     }
     @GetMapping("/roles/")
-    public List<Employee_role> getEmplayee_roles(){
+    public List<Employee_role> getEmployee_roles(){
         return employee_roleRepository.findAll();
     }
 
@@ -41,4 +41,5 @@ public class WitseController {
     public List<Employee> getEmployees(){
         return employeeRepository.findAll();
     }
+    */
 }

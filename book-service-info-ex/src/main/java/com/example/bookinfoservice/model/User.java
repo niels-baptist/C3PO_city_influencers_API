@@ -28,6 +28,8 @@ public class User {
     private String firstname;
     @Column(name = "\"last_name\"")
     private String lastname;
+    @Column(name = "\"user_name\"")
+    private String userName;
     @Column(name = "\"birth_date\"")
     private Date birthdate;
 
@@ -39,14 +41,17 @@ public class User {
 
     public User(){}
 
-    public User(int userId, Location location, String email, String password, String firstname, String lastname, Date birthdate) {
+    public User(int userId, Location location, String email, String password, String firstname, String lastname, String userName, Date birthdate, Influencer influencer, Employee employee) {
         this.userId = userId;
         this.location = location;
         this.email = email;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.userName = userName;
         this.birthdate = birthdate;
+        this.influencer = influencer;
+        this.employee = employee;
     }
 
     public int getUserId() {
@@ -57,12 +62,12 @@ public class User {
         this.userId = userId;
     }
 
-    public Location getLocationId() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocationId(Location locationId) {
-        this.location = locationId;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public String getEmail() {
@@ -97,20 +102,20 @@ public class User {
         this.lastname = lastname;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public Date getBirthdate() {
         return birthdate;
     }
 
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
     }
 
     public Influencer getInfluencer() {
