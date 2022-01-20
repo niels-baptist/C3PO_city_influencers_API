@@ -15,6 +15,9 @@ public class WitseController {
 
     @Autowired
     Employee_roleRepository employee_roleRepository;
+
+    @Autowired
+    UserRepository userRepository;
     @GetMapping("/Influencers/{influencer_id}")
     public Influencer getLocationById(@PathVariable int influencer_id){
         return influencerRepository.findByInfluencerId(influencer_id);
@@ -22,5 +25,10 @@ public class WitseController {
     @GetMapping("/roles/")
     public List<Employee_role> getEmplayee_roles(){
         return employee_roleRepository.findAll();
+    }
+
+    @GetMapping("/users/")
+    public List<User> getUsers(){
+        return userRepository.findAll();
     }
 }

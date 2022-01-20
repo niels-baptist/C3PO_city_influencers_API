@@ -1,5 +1,8 @@
 package com.example.bookinfoservice.model;
 import javax.persistence.*;
+import java.util.List;
+
+import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name="location", schema = "nocaps")
@@ -12,6 +15,9 @@ public class Location {
     private String name;
     @Column(name = "\"postal_code\"")
     private String postalCode;
+
+    @OneToMany(cascade = ALL,mappedBy = "location")
+    private List<User> Users;
 
     public Location(int locationId, String name, String postalCode) {
         this.locationId = locationId;
@@ -44,5 +50,13 @@ public class Location {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<User> getUsers() {
+        return Users;
+    }
+
+    public void setUsers(List<User> users) {
+        Users = users;
     }
 }

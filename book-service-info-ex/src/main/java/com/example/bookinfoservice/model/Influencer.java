@@ -1,6 +1,7 @@
 package com.example.bookinfoservice.model;
 import javax.persistence.*;
 
+
 @Entity
 @Table(name="influencer", schema = "nocaps")
 public class Influencer {
@@ -8,14 +9,15 @@ public class Influencer {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"influencer_id\"")
     private int influencerId;
-    @Column(name = "\"user_id\"")
-    private int userId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="userId", nullable=true)
+    private User user;
     @Column(name = "\"gender\"")
     private String gender;
 
-    public Influencer(int influencerId, int user_id, String gender) {
+    public Influencer(int influencerId, User user, String gender) {
         this.influencerId = influencerId;
-        this.userId = user_id;
+        this.user = user;
         this.gender = gender;
     }
 
@@ -30,12 +32,12 @@ public class Influencer {
         this.influencerId = influencer_id;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUserId() {
+        return user;
     }
 
-    public void setUserId(int user_id) {
-        this.userId = user_id;
+    public void setUserId(User user) {
+        this.user = user;
     }
 
     public String getGender() {
