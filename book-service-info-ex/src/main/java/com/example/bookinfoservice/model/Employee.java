@@ -8,42 +8,42 @@ public class Employee {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"employee_id\"")
-    private int employee_id;
+    private int employeeId;
     @Column(name = "\"user_id\"")
-    private int user_id;
+    private int userId;
     @Column(name = "\"role_id\"")
-    private int role_id;
+    private int roleId;
 
     public Employee() {
     }
 
-    public Employee(int employee_id, int user_id, int role_id) {
-        this.employee_id = employee_id;
-        this.user_id = user_id;
-        this.role_id = role_id;
+    public Employee(int employeeId, int userId, int roleId) {
+        this.employeeId = employeeId;
+        this.userId = userId;
+        this.roleId = roleId;
     }
 
-    public int getEmployee_id() {
-        return employee_id;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public int getRole_id() {
-        return role_id;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 }
