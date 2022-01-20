@@ -11,8 +11,9 @@ public class Employee {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"employee_id\"")
     private int employeeId;
-    @Column(name = "\"role_id\"")
-    private int roleId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="role_id", nullable=true)
+    private Employee_role employee_role;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id", nullable=true)
     private User user;
@@ -20,10 +21,10 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int employeeId,User user, int roleId) {
+    public Employee(int employeeId,User user, Employee_role roleId) {
         this.employeeId = employeeId;
         this.user = user;
-        this.roleId = roleId;
+        this.employee_role = employee_role;
     }
 
     public int getEmployeeId() {
@@ -34,12 +35,12 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public Employee_role getRoleId() {
+        return employee_role;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRoleId(Employee_role roleId) {
+        this.employee_role = roleId;
     }
 
     public User getUser() {
