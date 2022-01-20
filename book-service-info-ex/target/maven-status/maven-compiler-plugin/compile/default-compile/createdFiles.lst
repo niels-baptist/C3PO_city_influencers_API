@@ -1,0 +1,13 @@
+com\example\bookinfoservice\model\SubmissionStatus.class
+com\example\bookinfoservice\model\Employee.class
+com\example\bookinfoservice\model\Location.class
+com\example\bookinfoservice\controller\WitseController.class
+com\example\bookinfoservice\model\Employee_role.class
+com\example\bookinfoservice\repository\EmployeeRepository.class
+com\example\bookinfoservice\LocationInfoServiceApplication.class
+com\example\bookinfoservice\repository\Employee_roleRepository.class
+com\example\bookinfoservice\model\Influencer.class
+com\example\bookinfoservice\repository\InfluencerRepository.class
+com\example\bookinfoservice\model\User.class
+com\example\bookinfoservice\controller\LocationController.class
+com\example\bookinfoservice\repository\LocationRepository.class
