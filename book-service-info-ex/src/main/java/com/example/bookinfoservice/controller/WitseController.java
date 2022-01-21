@@ -10,36 +10,11 @@ import java.util.List;
 
 @RestController
 public class WitseController {
-    /*@Autowired
+    @Autowired
     InfluencerRepository influencerRepository;
-
-    @Autowired
-    Employee_roleRepository employee_roleRepository;
-    @Autowired
-    EmployeeRepository employeeRepository;
-    @Autowired
-    UserRepository userRepository;
-    @GetMapping("/Influencers/{influencer_id}")
-    public Influencer getLocationById(@PathVariable int influencer_id){
-        return influencerRepository.findByInfluencerId(influencer_id);
-    }
-    @GetMapping("/Influencers")
+    @GetMapping("/influencers/")
     public List<Influencer> getInfluencers(){
         return influencerRepository.findAll();
     }
-    @GetMapping("/roles/")
-    public List<Employee_role> getEmployee_roles(){
-        return employee_roleRepository.findAll();
-    }
 
-    @GetMapping("/users/")
-    public List<User> getUsers(){
-        return userRepository.findAll();
-    }
-
-    @GetMapping("/employees/")
-    public List<Employee> getEmployees(){
-        return employeeRepository.findAll();
-    }
-    */
 }

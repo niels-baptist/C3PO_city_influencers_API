@@ -39,19 +39,7 @@ public class LocationController {
     public List<CampaignStatus> getAllCampaignStatuses(){return campaignStatusRepository.findAll();
     }
 
-    //Campaign Domain
-    @Autowired
-    CampaignDomainRepository campaignDomainRepository;
-    @GetMapping("/campaigndomains/")
-    public List<CampaignDomain> getAllCampaignDomains(){return campaignDomainRepository.findAll();
-    }
 
-    //Campaign Platform
-    @Autowired
-    CampaignPlatformRepository campaignPlatformRepository;
-    @GetMapping("/campaignplatforms/")
-    public List<CampaignPlatform> getAllCampaignPlatforms(){return campaignPlatformRepository.findAll();
-    }
 
     //Social Media Account
     @Autowired
@@ -81,11 +69,5 @@ public class LocationController {
     public List<SubmissionStatus> getAllSubmissionStatuses(){return submissionStatusRepository.findAll();
     }
 
-    // Influencer domain
-    @Autowired
-    InfluencerDomainRepository influencerDomainRepository;
-    @GetMapping("/influencerdomains/")
-    public List<InfluencerDomain> getAllInfluencerDomains(){return influencerDomainRepository.findAll();
-    }
  }
 

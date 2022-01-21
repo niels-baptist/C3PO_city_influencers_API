@@ -1,9 +1,13 @@
 package com.example.bookinfoservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="domain", schema = "nocaps")
+@JsonIgnoreProperties(value = {"influencers","campaigns","hibernateLazyInitializer"}, allowSetters = true)
 public class Domain {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -13,6 +17,11 @@ public class Domain {
     private String name;
     @Column(name = "\"description\"")
     private String description;
+
+    @ManyToMany(mappedBy = "domains")
+    Set<Influencer> influencers;
+    @ManyToMany(mappedBy = "domains")
+    Set<Campaign> campaigns;
 
     public Domain() {
     }
@@ -45,5 +54,21 @@ public class Domain {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Influencer> getInfluencers() {
+        return influencers;
+    }
+
+    public void setInfluencers(Set<Influencer> influencers) {
+        this.influencers = influencers;
+    }
+
+    public Set<Campaign> getCampaigns() {
+        return campaigns;
+    }
+
+    public void setCampaigns(Set<Campaign> campaigns) {
+        this.campaigns = campaigns;
     }
 }

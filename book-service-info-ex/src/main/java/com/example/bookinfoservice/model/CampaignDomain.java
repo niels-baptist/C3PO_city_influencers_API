@@ -1,12 +1,11 @@
 package com.example.bookinfoservice.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Entity
-@Table(name="campaign_domain", schema = "nocaps")
-public class CampaignDomain {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+@Embeddable
+public class CampaignDomain implements Serializable {
+
     @Column(name = "\"domain_id\"")
     private int domainId;
     @Column(name = "\"campaign_id\"")

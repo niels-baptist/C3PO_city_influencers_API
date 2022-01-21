@@ -1,7 +1,7 @@
 package com.example.bookinfoservice.model;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -17,9 +17,17 @@ public class Influencer {
     @Column(name = "\"gender\"")
     private String gender;
 
-    public Influencer(int influencerId, User user, String gender) {
+    @ManyToMany
+    @JoinTable(
+            name = "influencer_domain",
+            joinColumns = @JoinColumn(name = "influencer_id"),
+            inverseJoinColumns = @JoinColumn(name = "domain_id"))
+    Set<Domain> domains;
+
+    public Influencer(int influencerId, User user,Set<Domain> domains, String gender) {
         this.influencerId = influencerId;
         this.user = user;
+        this.domains = domains;
         this.gender = gender;
     }
 
@@ -50,5 +58,14 @@ public class Influencer {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+    public Set<Domain> getDomains() {
+        return domains;
+    }
+
+    public void setDomains(Set<Domain> influencerDomains) {
+        this.domains = influencerDomains;
     }
 }

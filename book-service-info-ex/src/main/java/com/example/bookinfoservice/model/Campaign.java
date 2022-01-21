@@ -1,6 +1,7 @@
 package com.example.bookinfoservice.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="campaign", schema = "nocaps")
@@ -9,18 +10,29 @@ public class Campaign {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"campaign_id\"")
     private int campaignId;
-    @Column(name = "\"employee_id\"")
-    private int employeeId;
-    @Column(name = "\"location_id\"")
-    private int locationId;
-    @Column(name = "\"status_id\"")
-    private int statusId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="employee_id", nullable=true)
+    private Employee employee;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="employee_id", nullable=true)
+    private Location location;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="employee_id", nullable=true)
+    private CampaignStatus campaignStatus;
     @Column(name = "\"name\"")
     private String name;
     @Column(name = "\"description\"")
     private String description;
     @Column(name = "\"foto_url\"")
     private String fotoUrl;
+
+    @ManyToMany
+    @JoinTable(
+            name = "campaign_domain",
+            joinColumns = @JoinColumn(name = "campaign_id"),
+            inverseJoinColumns = @JoinColumn(name = "domain_id"))
+    Set<Domain> domains;
 
     public Campaign() {
     }
@@ -33,28 +45,28 @@ public class Campaign {
         this.campaignId = campaignId;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
-    public int getLocationId() {
-        return locationId;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public int getStatusId() {
-        return statusId;
+    public CampaignStatus getCampaignStatus() {
+        return campaignStatus;
     }
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
+    public void setCampaignStatus(CampaignStatus campaignStatus) {
+        this.campaignStatus = campaignStatus;
     }
 
     public String getName() {
@@ -81,11 +93,19 @@ public class Campaign {
         this.fotoUrl = fotoUrl;
     }
 
-    public Campaign(int campaignId, int employeeId, int locationId, int statusId, String name, String description, String fotoUrl) {
+    public Set<Domain> getDomains() {
+        return domains;
+    }
+
+    public void setDomains(Set<Domain> domains) {
+        this.domains = domains;
+    }
+
+    public Campaign(int campaignId, Employee employee, Location location, CampaignStatus campaignStatus, String name, String description, String fotoUrl) {
         this.campaignId = campaignId;
-        this.employeeId = employeeId;
-        this.locationId = locationId;
-        this.statusId = statusId;
+        this.employee = employee;
+        this.location = location;
+        this.campaignStatus = campaignStatus;
         this.name = name;
         this.description = description;
         this.fotoUrl = fotoUrl;

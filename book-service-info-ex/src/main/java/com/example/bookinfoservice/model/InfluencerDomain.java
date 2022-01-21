@@ -1,12 +1,11 @@
 package com.example.bookinfoservice.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Entity
-@Table(name="influencer_domain", schema = "nocaps")
-public class InfluencerDomain {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+@Embeddable
+public class InfluencerDomain implements Serializable {
+
     @Column(name = "\"domain_id\"")
     private int domainId;
     @Column(name = "\"influencer_id\"")
