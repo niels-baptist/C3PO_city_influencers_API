@@ -1,26 +1,34 @@
 package com.example.bookinfoservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name="submission", schema = "nocaps")
+@JsonIgnoreProperties(value = {"campaign","influencer","hibernateLazyInitializer"}, allowSetters = true)
 public class Submission {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"submission_id\"")
     private int submissionId;
-    @Column(name = "\"influencer_id\"")
-    private int influencerId;
-    @Column(name = "\"campaign_id\"")
-    private int campaignId;
-    @Column(name = "\"status_id\"")
-    private int statusId;
+
+
     @Column(name = "\"url\"")
     private String url;
     @Column(name = "\"description\"")
     private String description;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="status_id", nullable=true)
+    private SubmissionStatus submissionStatus;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="\"campaign_id\"", nullable=true)
+    private Campaign campaign;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="\"influencer_id\"", nullable=true)
+    private Influencer influencer;
     public Submission() {
     }
 
@@ -32,28 +40,28 @@ public class Submission {
         this.submissionId = submissionId;
     }
 
-    public int getInfluencerId() {
-        return influencerId;
+    public SubmissionStatus getSubmissionStatus() {
+        return submissionStatus;
     }
 
-    public void setInfluencerId(int influencerId) {
-        this.influencerId = influencerId;
+    public void setSubmissionStatus(SubmissionStatus submissionStatus) {
+        this.submissionStatus = submissionStatus;
     }
 
-    public int getCampaignId() {
-        return campaignId;
+    public Campaign getCampaign() {
+        return campaign;
     }
 
-    public void setCampaignId(int campaignId) {
-        this.campaignId = campaignId;
+    public void setCampaign(Campaign campaign) {
+        this.campaign = campaign;
     }
 
-    public int getStatusId() {
-        return statusId;
+    public Influencer getInfluencer() {
+        return influencer;
     }
 
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
+    public void setInfluencer(Influencer influencer) {
+        this.influencer = influencer;
     }
 
     public String getUrl() {
@@ -72,12 +80,12 @@ public class Submission {
         this.description = description;
     }
 
-    public Submission(int submissionId, int influencerId, int campaignId, int statusId, String url, String description) {
+    public Submission(int submissionId, String url, String description, SubmissionStatus submissionStatus, Campaign campaign, Influencer influencer) {
         this.submissionId = submissionId;
-        this.influencerId = influencerId;
-        this.campaignId = campaignId;
-        this.statusId = statusId;
         this.url = url;
         this.description = description;
+        this.submissionStatus = submissionStatus;
+        this.campaign = campaign;
+        this.influencer = influencer;
     }
 }

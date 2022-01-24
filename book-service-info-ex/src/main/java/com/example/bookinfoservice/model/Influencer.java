@@ -1,6 +1,7 @@
 package com.example.bookinfoservice.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 
@@ -16,6 +17,11 @@ public class Influencer {
     private User user;
     @Column(name = "\"gender\"")
     private String gender;
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "influencer")
+    private List<Submission> submissions;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "influencer")
+    private List<SocialMediaAccount> accounts;
 
     @ManyToMany
     @JoinTable(

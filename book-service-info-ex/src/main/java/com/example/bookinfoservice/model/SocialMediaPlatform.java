@@ -1,6 +1,8 @@
 package com.example.bookinfoservice.model;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="social_media_platform", schema = "nocaps")
@@ -13,6 +15,12 @@ public class SocialMediaPlatform {
     private String name;
     @Column(name = "\"url\"")
     private String url;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "platform")
+    private List<SocialMediaAccount> accounts;
+
+    @ManyToMany(mappedBy = "platforms")
+    Set<Campaign> campaigns;
 
     public SocialMediaPlatform(int social_media_platformId, String name, String url) {
         this.social_media_platformId = social_media_platformId;

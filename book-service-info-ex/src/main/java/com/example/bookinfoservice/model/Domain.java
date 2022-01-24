@@ -12,7 +12,7 @@ public class Domain {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"domain_id\"")
-    private int domanId;
+    private int domainId;
     @Column(name = "\"name\"")
     private String name;
     @Column(name = "\"description\"")
@@ -27,17 +27,17 @@ public class Domain {
     }
 
     public Domain(int domanId, String name, String description) {
-        this.domanId = domanId;
+        this.domainId = domanId;
         this.name = name;
         this.description = description;
     }
 
-    public int getDomanId() {
-        return domanId;
+    public int getDomainId() {
+        return domainId;
     }
 
-    public void setDomanId(int domanId) {
-        this.domanId = domanId;
+    public void setDomainId(int domanId) {
+        this.domainId = domanId;
     }
 
     public String getName() {

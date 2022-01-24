@@ -1,30 +1,52 @@
 package com.example.bookinfoservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="employee", schema = "nocaps")
+
 public class Employee {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"employee_id\"")
     private int employeeId;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="role_id", nullable=true)
     private Employee_role employee_role;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id", nullable=true)
     private User user;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<Campaign> campaigns;
 
     public Employee() {
     }
 
-    public Employee(int employeeId,User user, Employee_role roleId) {
+    public Employee(int employeeId, Employee_role employee_role, User user, List<Campaign> campaigns) {
         this.employeeId = employeeId;
-        this.user = user;
         this.employee_role = employee_role;
+        this.user = user;
+        this.campaigns = campaigns;
+    }
+
+    public Employee_role getEmployee_role() {
+        return employee_role;
+    }
+
+    public void setEmployee_role(Employee_role employee_role) {
+        this.employee_role = employee_role;
+    }
+
+    public List<Campaign> getCampaigns() {
+        return campaigns;
+    }
+
+    public void setCampaigns(List<Campaign> campaigns) {
+        this.campaigns = campaigns;
     }
 
     public int getEmployeeId() {

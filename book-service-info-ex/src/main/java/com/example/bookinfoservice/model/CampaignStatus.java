@@ -1,31 +1,37 @@
 package com.example.bookinfoservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="campaign_status", schema = "nocaps")
+@JsonIgnoreProperties(value = {"campaigns","hibernateLazyInitializer"}, allowSetters = true)
 public class CampaignStatus {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"status_id\"")
-    private int campaignId;
+    private int statusId;
     @Column(name = "\"name\"")
     private String name;
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "campaignStatus")
+    private List<Campaign> campaigns;
 
     public CampaignStatus() {
     }
 
     public CampaignStatus(int campaignId, String name) {
-        this.campaignId = campaignId;
+        this.statusId = campaignId;
         this.name = name;
     }
 
-    public int getCampaignId() {
-        return campaignId;
+    public int getStatusId() {
+        return statusId;
     }
 
-    public void setCampaignId(int campaignId) {
-        this.campaignId = campaignId;
+    public void setStatusId(int campaignId) {
+        this.statusId = campaignId;
     }
 
     public String getName() {
