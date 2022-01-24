@@ -7,6 +7,7 @@ import com.example.bookinfoservice.repository.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class LoginController {
     // logging in an employee on the web application
