@@ -13,7 +13,7 @@ public class SocialMediaPlatform {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"social_media_platform_id\"")
-    private int social_media_platformId;
+    private int socialMediaPlatformId;
     @Column(name = "\"name\"")
     private String name;
     @Column(name = "\"url\"")
@@ -26,7 +26,7 @@ public class SocialMediaPlatform {
     Set<Campaign> campaigns;
 
     public SocialMediaPlatform(int social_media_platformId, String name, String url) {
-        this.social_media_platformId = social_media_platformId;
+        this.socialMediaPlatformId = social_media_platformId;
         this.name = name;
         this.url = url;
     }
@@ -34,12 +34,12 @@ public class SocialMediaPlatform {
     public SocialMediaPlatform() {
     }
 
-    public int getSocial_media_platformId() {
-        return social_media_platformId;
+    public int getSocialMediaPlatformId() {
+        return socialMediaPlatformId;
     }
 
-    public void setSocial_media_platformId(int social_media_platformId) {
-        this.social_media_platformId = social_media_platformId;
+    public void setSocialMediaPlatformId(int social_media_platformId) {
+        this.socialMediaPlatformId = social_media_platformId;
     }
 
     public String getName() {

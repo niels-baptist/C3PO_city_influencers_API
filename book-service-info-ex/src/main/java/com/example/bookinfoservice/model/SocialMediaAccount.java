@@ -11,7 +11,7 @@ public class SocialMediaAccount {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"social_media_account_id\"")
-    private int social_media_accountId;
+    private int socialMediaAccountId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="influencer_id", nullable=true)
     private Influencer influencer;
@@ -27,19 +27,19 @@ public class SocialMediaAccount {
     }
 
     public SocialMediaAccount(int social_media_accountId, Influencer influencer, SocialMediaPlatform platform, String name, String url) {
-        this.social_media_accountId = social_media_accountId;
+        this.socialMediaAccountId = social_media_accountId;
         this.influencer = influencer;
         this.platform = platform;
         this.name = name;
         this.url = url;
     }
 
-    public int getSocial_media_accountId() {
-        return social_media_accountId;
+    public int getSocialMediaAccountId() {
+        return socialMediaAccountId;
     }
 
-    public void setSocial_media_accountId(int social_media_accountId) {
-        this.social_media_accountId = social_media_accountId;
+    public void setSocialMediaAccountId(int social_media_accountId) {
+        this.socialMediaAccountId = social_media_accountId;
     }
 
 
@@ -57,5 +57,21 @@ public class SocialMediaAccount {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Influencer getInfluencer() {
+        return influencer;
+    }
+
+    public void setInfluencer(Influencer influencer) {
+        this.influencer = influencer;
+    }
+
+    public SocialMediaPlatform getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(SocialMediaPlatform platform) {
+        this.platform = platform;
     }
 }
