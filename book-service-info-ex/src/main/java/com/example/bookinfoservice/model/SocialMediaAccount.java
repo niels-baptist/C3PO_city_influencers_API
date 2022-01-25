@@ -1,9 +1,12 @@
 package com.example.bookinfoservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="social_media_account", schema = "nocaps")
+@JsonIgnoreProperties(value = {"influencer","hibernateLazyInitializer"}, allowSetters = true)
 public class SocialMediaAccount {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

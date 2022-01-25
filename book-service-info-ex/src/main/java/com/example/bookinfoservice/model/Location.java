@@ -10,7 +10,7 @@ import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name="location", schema = "nocaps")
-@JsonIgnoreProperties(value = {"users","hibernateLazyInitializer"}, allowSetters = true)
+@JsonIgnoreProperties(value = {"users","campaigns","hibernateLazyInitializer"}, allowSetters = true)
 public class Location {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -26,6 +26,12 @@ public class Location {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<User> users;
+
+    @OneToMany(mappedBy = "location",
+            orphanRemoval = true,
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<Campaign> campaigns;
 
     public Location(int locationId, String name, String postalCode) {
         this.locationId = locationId;
