@@ -19,14 +19,20 @@ public class InfluencerController {
     SocialMediaAccountRepository socialMediaAccountRepository;
     @Autowired
     UserRepository userRepository;
-    @GetMapping("/influencers/platform/{platform_id}")
-    public List<Influencer> getInfluencerByPlatform(@PathVariable Integer platform_id){
-        List<SocialMediaAccount> accounts = socialMediaAccountRepository.findAllByPlatformSocialMediaPlatformId(platform_id);
-        return accounts.stream().map(a -> influencerRepository.findByInfluencerId(a.getInfluencer().getinfluencerId())).collect(Collectors.toList());
-    }
+    @Autowired
+    DomainRepository domainRepository;
     @GetMapping("/users")
     public List<User> getUsers(){
         return userRepository.findAll();
     }
+    @GetMapping("/influencers/platform/{platform_id}")
+    public List<Influencer> getInfluencerByPlatform(@PathVariable Integer platform_id){
+        return influencerRepository.findAllByPlatformId(platform_id);
+    }
+    @GetMapping("/influencers/domain/{domain_id}")
+    public List<Influencer> getInfluencerByDomain(@PathVariable Integer domain_id){
+        return influencerRepository.findAllByDomainsContaining(domainRepository.findByDomainId(domain_id));
+    }
+
 }
 

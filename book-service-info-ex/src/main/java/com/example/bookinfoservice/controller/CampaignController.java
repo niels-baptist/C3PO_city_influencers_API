@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 @CrossOrigin
 @RestController
 public class CampaignController {
+
+    // campaign statusId: 1: saved , 2: open, 3: in afwachting van goedkeuring, 4: afgerond
+
     @Autowired
     InfluencerRepository influencerRepository;
     @Autowired
@@ -20,12 +23,15 @@ public class CampaignController {
     // Get all campaigns on submissions with specified influencerId
     @Autowired
     SubmissionRepository submissionRepository;
-    @GetMapping("/campaigns/recomended/{influecner_id}")
+    @GetMapping("/campaigns/recomended/{influencer_id}")
     public List<Campaign> getRecomendedCampaignsByInfluencerId(@PathVariable Integer influencer_id){
-        List<Submission> submissions = submissionRepository.findAllByInfluencerInfluencerIdAndSubmissionStatus_StatusId(influencer_id,1);
-        List<Campaign>campaignes = submissions.stream().map(s ->campaignRepository.findByCampaignId(s.getCampaign().getCampaignId())).collect(Collectors.toList());
-        return campaignes;
+        return campaignRepository.findAllByStatusIdAndInfluencerId(1,influencer_id,2);
     }
+    @GetMapping("/campaigns/{campaign_id}")
+    public Campaign getCampaignByCampaignId(@PathVariable Integer campaign_id){
+        return campaignRepository.findByCampaignId(campaign_id);
+    }
+
     @GetMapping("/campaigns/domainFilter/{influencer_id}")
     public List<Campaign> getOpenCampaignsByDomains(@PathVariable Integer influencer_id){
         Set<Domain> domains = influencerRepository.findByInfluencerId(influencer_id).getDomains();
