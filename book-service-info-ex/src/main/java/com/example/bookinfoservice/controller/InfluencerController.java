@@ -26,7 +26,7 @@ public class InfluencerController {
         return influencerRepository.findAll();
     }
 
-    @GetMapping("/users")
+    @GetMapping("/api/users")
     public List<User> getUsers(){
         return userRepository.findAll();
     }
