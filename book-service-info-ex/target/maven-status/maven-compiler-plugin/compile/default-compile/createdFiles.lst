@@ -1,6 +1,5 @@
 com\example\bookinfoservice\model\Employee.class
 com\example\bookinfoservice\model\Location.class
-com\example\bookinfoservice\controller\WitseController.class
 com\example\bookinfoservice\model\Employee_role.class
 com\example\bookinfoservice\repository\UserRepository.class
 com\example\bookinfoservice\model\CampaignStatus.class

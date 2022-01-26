@@ -2,7 +2,6 @@ C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\ja
 C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\repository\SubmissionStatusRepository.java
 C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\controller\LocationController.java
 C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\repository\SubmissionRepository.java
-C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\controller\WitseController.java
 C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\repository\CampaignStatusRepository.java
 C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\repository\EmployeeRepository.java
 C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\repository\LocationRepository.java
@@ -22,6 +21,7 @@ C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\ja
 C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\repository\Employee_roleRepository.java
 C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\model\SubmissionStatus.java
 C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\controller\CampaignController.java
+C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\repository\DomainRepository.java
 C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\repository\UserRepository.java
 C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\controller\LoginController.java
 C:\school\project\API\C3PO_city_influencers_API\book-service-info-ex\src\main\java\com\example\bookinfoservice\repository\CampaignRepository.java

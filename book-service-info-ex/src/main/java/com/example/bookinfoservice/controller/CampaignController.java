@@ -23,6 +23,7 @@ public class CampaignController {
     // Get all campaigns on submissions with specified influencerId
     @Autowired
     SubmissionRepository submissionRepository;
+
     @GetMapping("/campaigns/{campaign_id}")
     public Campaign getCampaignByCampaignId(@PathVariable Integer campaign_id){
         return campaignRepository.findByCampaignId(campaign_id);

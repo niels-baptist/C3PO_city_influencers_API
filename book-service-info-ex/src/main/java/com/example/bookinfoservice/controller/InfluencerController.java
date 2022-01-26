@@ -21,6 +21,11 @@ public class InfluencerController {
     UserRepository userRepository;
     @Autowired
     DomainRepository domainRepository;
+    @GetMapping("/influencers")
+    public List<Influencer> getInfluencers(){
+        return influencerRepository.findAll();
+    }
+
     @GetMapping("/users")
     public List<User> getUsers(){
         return userRepository.findAll();

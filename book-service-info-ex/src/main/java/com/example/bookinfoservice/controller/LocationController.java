@@ -15,7 +15,7 @@ public class LocationController {
     //location
     @Autowired
     LocationRepository locationRepository;
-    @GetMapping("/locations/")
+    @GetMapping("/locations")
     public List<Location> getAllLocations(){
         return locationRepository.findAll();
     }
@@ -30,14 +30,14 @@ public class LocationController {
     //Campaign
     @Autowired
     CampaignRepository campaignRepository;
-    @GetMapping("/campaigns/")
+    @GetMapping("/campaigns")
     public List<Campaign> getAllCampaigns(){return campaignRepository.findAll();
     }
 
     //Campaign Status
     @Autowired
     CampaignStatusRepository campaignStatusRepository;
-    @GetMapping("/campaignstatuses/")
+    @GetMapping("/campaignstatuses")
     public List<CampaignStatus> getAllCampaignStatuses(){return campaignStatusRepository.findAll();
     }
 
@@ -46,28 +46,28 @@ public class LocationController {
     //Social Media Account
     @Autowired
     SocialMediaAccountRepository socialMediaAccountRepository;
-    @GetMapping("/accounts/")
+    @GetMapping("/accounts")
     public List<SocialMediaAccount> getAllSocialMediaAccounts(){return socialMediaAccountRepository.findAll();
     }
 
     //Social Media Platform
     @Autowired
     SocialMediaPlatformRepository socialMediaPlatformRepository;
-    @GetMapping("/platforms/")
+    @GetMapping("/platforms")
     public List<SocialMediaPlatform> getAllsocialMediaPlatforms(){return socialMediaPlatformRepository.findAll();
     }
 
     // Submission
     @Autowired
     SubmissionRepository submissionRepository;
-    @GetMapping("/submissions/")
+    @GetMapping("/submissions")
     public List<Submission> getAllSubmissions(){return submissionRepository.findAll();
     }
 
     // Submission status
     @Autowired
     SubmissionStatusRepository submissionStatusRepository;
-    @GetMapping("/submissionStatuses/")
+    @GetMapping("/submissionStatuses")
     public List<SubmissionStatus> getAllSubmissionStatuses(){return submissionStatusRepository.findAll();
     }
 

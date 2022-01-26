@@ -22,6 +22,7 @@ public class SubmissionController {
     SubmissionRepository submissionRepository;
     @Autowired
     CampaignRepository campaignRepository;
+
     @GetMapping("/submissions/influencer/{influencer_id}")
     public List<Campaign> getRecomendedCampaignsByInfluencerId(@PathVariable Integer influencer_id){
         List<Submission> submissions = submissionRepository.findAllByInfluencerInfluencerIdAndSubmissionStatus_StatusId(influencer_id,1);

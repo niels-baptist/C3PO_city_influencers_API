@@ -19,6 +19,7 @@ public class LoginController {
 
     @Autowired
     InfluencerRepository influencerRepository;
+    /*
     @GetMapping("/users/username/{user_name}")
     public User getUserByEmail(@PathVariable String user_name){
         return userRepository.getUserByUserName(user_name);
@@ -52,4 +53,7 @@ public class LoginController {
     public Employee addEmployee(@RequestBody Employee employee){
         return employeeRepository.save(employee);
     }
+
+     */
+
 }
