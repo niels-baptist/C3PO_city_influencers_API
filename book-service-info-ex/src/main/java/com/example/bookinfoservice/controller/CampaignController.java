@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
-public class CampaignController {
+public class CampaignController  {
 
     // campaign statusId: 1: saved , 2: open, 3: in afwachting van goedkeuring, 4: afgerond
 
@@ -24,7 +24,7 @@ public class CampaignController {
     @Autowired
     SubmissionRepository submissionRepository;
 
-    @GetMapping("/campaigns/{campaign_id}")
+    @GetMapping(value = "/campaigns/{campaign_id}", produces = "application/json")
     public Campaign getCampaignByCampaignId(@PathVariable Integer campaign_id){
         return campaignRepository.findByCampaignId(campaign_id);
     }

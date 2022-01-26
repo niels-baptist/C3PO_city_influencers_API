@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-public class LocationController {
+public class LocationController  {
     //location
     @Autowired
     LocationRepository locationRepository;

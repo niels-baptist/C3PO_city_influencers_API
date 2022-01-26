@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
-public class SubmissionController {
+public class SubmissionController  {
     @Autowired
     SubmissionRepository submissionRepository;
     @Autowired

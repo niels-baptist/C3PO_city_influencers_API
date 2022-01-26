@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
-public class SharedController {
+public class SharedController  {
     @Autowired
     DomainRepository domainRepository;
 

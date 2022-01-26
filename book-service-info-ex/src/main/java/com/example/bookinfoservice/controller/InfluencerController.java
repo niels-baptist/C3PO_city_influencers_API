@@ -21,12 +21,14 @@ public class InfluencerController {
     UserRepository userRepository;
     @Autowired
     DomainRepository domainRepository;
-    @GetMapping("/influencers")
+    @CrossOrigin()
+    @GetMapping(value ="/influencers", produces = "application/json")
     public List<Influencer> getInfluencers(){
         return influencerRepository.findAll();
     }
 
-    @GetMapping("/api/users")
+    @CrossOrigin()
+    @GetMapping(value = "/users", produces = "application/json")
     public List<User> getUsers(){
         return userRepository.findAll();
     }
