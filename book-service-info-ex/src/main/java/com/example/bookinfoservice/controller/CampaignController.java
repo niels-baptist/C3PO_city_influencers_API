@@ -23,17 +23,19 @@ public class CampaignController {
     // Get all campaigns on submissions with specified influencerId
     @Autowired
     SubmissionRepository submissionRepository;
-    @GetMapping("/campaigns/recomended/{influencer_id}")
-    public List<Campaign> getRecomendedCampaignsByInfluencerId(@PathVariable Integer influencer_id){
-        return campaignRepository.findAllByStatusIdAndInfluencerId(1,influencer_id,2);
-    }
     @GetMapping("/campaigns/{campaign_id}")
     public Campaign getCampaignByCampaignId(@PathVariable Integer campaign_id){
         return campaignRepository.findByCampaignId(campaign_id);
     }
 
-    @GetMapping("/campaigns/domainFilter/{influencer_id}")
+    @GetMapping("/campaigns/recomended/{influencer_id}")
+    public List<Campaign> getRecomendedCampaignsByInfluencerId(@PathVariable Integer influencer_id){
+        return campaignRepository.findAllByStatusIdAndInfluencerId(1,influencer_id,2);
+    }
+
+    @GetMapping("/campaigns/openCampaigns/{influencer_id}")
     public List<Campaign> getOpenCampaignsByDomains(@PathVariable Integer influencer_id){
+        // This call to the data base works better with lambda functions due to the amount of association tables that would be joined in native sql
         Set<Domain> domains = influencerRepository.findByInfluencerId(influencer_id).getDomains();
         List<Campaign> campaigns = domains.stream().map(d -> campaignRepository.findAllByDomainsContaining(d)).flatMap(List::stream).collect(Collectors.toList());
         return campaigns;
