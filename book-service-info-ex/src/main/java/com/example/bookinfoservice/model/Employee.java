@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name="employee", schema = "nocaps")
-
+@JsonIgnoreProperties(value = {"campaigns","hibernateLazyInitializer"}, allowSetters = true)
 public class Employee {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -31,6 +31,11 @@ public class Employee {
         this.employee_role = employee_role;
         this.user = user;
         this.campaigns = campaigns;
+    }
+
+    public Employee(Employee_role employee_role, User user) {
+        this.employee_role = employee_role;
+        this.user = user;
     }
 
     public Employee_role getEmployee_role() {

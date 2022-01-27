@@ -6,10 +6,7 @@ import com.example.bookinfoservice.repository.CampaignRepository;
 import com.example.bookinfoservice.repository.InfluencerRepository;
 import com.example.bookinfoservice.repository.SubmissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -28,5 +25,10 @@ public class SubmissionController  {
         List<Submission> submissions = submissionRepository.findAllByInfluencerInfluencerIdAndSubmissionStatus_StatusId(influencer_id,1);
         List<Campaign> campaignes = submissions.stream().map(s ->campaignRepository.findByCampaignId(s.getCampaign().getCampaignId())).collect(Collectors.toList());
         return campaignes;
+    }
+
+    @PostMapping("/submissions")
+    public Submission addCampaign(@RequestBody Submission submission){
+        return submissionRepository.save(new Submission());
     }
 }

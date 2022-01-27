@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="campaign", schema = "nocaps")
-@JsonIgnoreProperties(value = {"employee","socialMediaAccounts","hibernateLazyInitializer"}, allowSetters = true)
+@JsonIgnoreProperties(value = {"socialMediaAccounts","hibernateLazyInitializer"}, allowSetters = true)
 public class Campaign {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -55,6 +55,17 @@ public class Campaign {
     Set<SocialMediaPlatform> platforms;
 
     public Campaign() {
+    }
+
+    public Campaign(Employee employee, Location location, CampaignStatus campaignStatus, String name, String description, String fotoUrl, Set<Domain> domains, Set<SocialMediaPlatform> platforms) {
+        this.employee = employee;
+        this.location = location;
+        this.campaignStatus = campaignStatus;
+        this.name = name;
+        this.description = description;
+        this.fotoUrl = fotoUrl;
+        this.domains = domains;
+        this.platforms = platforms;
     }
 
     public int getCampaignId() {
@@ -127,6 +138,14 @@ public class Campaign {
 
     public void setSubmissions(List<Submission> submissions) {
         this.submissions = submissions;
+    }
+
+    public Set<SocialMediaPlatform> getPlatforms() {
+        return platforms;
+    }
+
+    public void setPlatforms(Set<SocialMediaPlatform> platforms) {
+        this.platforms = platforms;
     }
 
     public Campaign(int campaignId, Employee employee, Location location, CampaignStatus campaignStatus, List<Submission> submissions, String name, String description, String fotoUrl, Set<Domain> domains) {

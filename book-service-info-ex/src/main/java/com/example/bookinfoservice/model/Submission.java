@@ -32,6 +32,14 @@ public class Submission {
     public Submission() {
     }
 
+    public Submission(String url, String description, SubmissionStatus submissionStatus, Campaign campaign, Influencer influencer) {
+        this.url = url;
+        this.description = description;
+        this.submissionStatus = submissionStatus;
+        this.campaign = campaign;
+        this.influencer = influencer;
+    }
+
     public int getSubmissionId() {
         return submissionId;
     }

@@ -37,6 +37,11 @@ public class Influencer {
         this.gender = gender;
     }
 
+    public Influencer(User user, String gender) {
+        this.user = user;
+        this.gender = gender;
+    }
+
     public Influencer() {
     }
 

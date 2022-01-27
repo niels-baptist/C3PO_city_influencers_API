@@ -25,7 +25,7 @@ public class CampaignController  {
     SubmissionRepository submissionRepository;
 
     @GetMapping(value = "/campaigns", produces = "application/json")
-    public List<Campaign> getCampaigns(@PathVariable Integer campaign_id){
+    public List<Campaign> getCampaigns(){
         return campaignRepository.findAll();
     }
 
@@ -45,6 +45,11 @@ public class CampaignController  {
         Set<Domain> domains = influencerRepository.findByInfluencerId(influencer_id).getDomains();
         List<Campaign> campaigns = domains.stream().map(d -> campaignRepository.findAllByDomainsContaining(d)).flatMap(List::stream).collect(Collectors.toList());
         return campaigns;
+    }
+
+    @PostMapping("/campaigns")
+    public Campaign addCampaign(@RequestBody Campaign campaign){
+        return campaignRepository.save(new Campaign(campaign.getEmployee(), campaign.getLocation(), campaign.getCampaignStatus(), campaign.getName(), campaign.getDescription(), campaign.getFotoUrl(), campaign.getDomains(), campaign.getPlatforms()));
     }
 
 }
