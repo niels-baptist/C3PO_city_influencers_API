@@ -5,11 +5,14 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import com.example.bookinfoservice.repository.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 @CrossOrigin
 @RestController
@@ -27,6 +30,27 @@ public class LoginController {
     @Autowired
     LocationRepository locationRepository;
 
+    // // login function
+    @PostMapping("/users/login")
+    public boolean loginUser(@RequestBody String user_username, String user_password) {
+        String database_password = userRepository.getUserByUserName(user_username).getPassword();
+        return Objects.equals(database_password, user_password);
+    }
+
+    @PostMapping("/influencers/login")
+    public boolean loginInfluencer(@RequestBody String user_username, String user_password) {
+        String database_password = userRepository.getUserByUserName(user_username).getPassword();
+        return Objects.equals(database_password, user_password);
+    }
+
+    @PostMapping("/employees/login")
+    public boolean loginEmployees(@RequestBody String user_username, String user_password) {
+        String database_password = userRepository.getUserByUserName(user_username).getPassword();
+        return Objects.equals(database_password, user_password);
+    }
+
+
+
     @GetMapping("/users/username/{user_name}")
     public User getUserByEmail(@PathVariable String user_name){
         return userRepository.getUserByUserName(user_name);
@@ -42,19 +66,8 @@ public class LoginController {
         return employeeRepository.findAllByuserUserName(user_name).stream().findFirst().get();
     }
 
-    @GetMapping("/influencers/username/{user_name}")
-    public Influencer getInfluencerByUserName(@PathVariable String user_name){
-        return influencerRepository.findAllByuserUserName(user_name).stream().findFirst().get();
-    }
-    @PostMapping("/users/register")
-    public User addUser(@RequestBody User user){
-        return userRepository.save(new User(user.getLocation(), user.getEmail(),user.getPassword(), user.getFirstname(), user.getLastname(), user.getUserName(), user.getBirthdate()));
-    }
+    // // Employee CRUD
 
-    @PostMapping("/influencers/register")
-    public Influencer addInfluencer(@RequestBody Influencer influencer){
-        return influencerRepository.save(new Influencer(influencer.getUser(),influencer.getGender()));
-    }
     @PostMapping(value = "/employees/register", consumes =MediaType.APPLICATION_JSON_VALUE ,
             headers = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

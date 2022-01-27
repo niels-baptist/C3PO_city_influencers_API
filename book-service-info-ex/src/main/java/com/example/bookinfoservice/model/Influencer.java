@@ -42,6 +42,12 @@ public class Influencer {
         this.gender = gender;
     }
 
+    public Influencer(User user, String gender, Set<Domain> domains) {
+        this.user = user;
+        this.gender = gender;
+        this.domains = domains;
+    }
+
     public Influencer() {
     }
 
