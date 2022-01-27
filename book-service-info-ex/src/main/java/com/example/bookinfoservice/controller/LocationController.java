@@ -27,12 +27,7 @@ public class LocationController  {
     public List<Employee> getAllEmployees(){return employeeRepository.findAll();
     }*/
 
-    //Campaign
-    @Autowired
-    CampaignRepository campaignRepository;
-    @GetMapping("/campaigns")
-    public List<Campaign> getAllCampaigns(){return campaignRepository.findAll();
-    }
+
 
     //Campaign Status
     @Autowired

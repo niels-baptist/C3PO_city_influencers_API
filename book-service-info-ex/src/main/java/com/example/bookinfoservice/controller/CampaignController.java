@@ -24,6 +24,11 @@ public class CampaignController  {
     @Autowired
     SubmissionRepository submissionRepository;
 
+    @GetMapping(value = "/campaigns", produces = "application/json")
+    public List<Campaign> getCampaigns(@PathVariable Integer campaign_id){
+        return campaignRepository.findAll();
+    }
+
     @GetMapping(value = "/campaigns/{campaign_id}", produces = "application/json")
     public Campaign getCampaignByCampaignId(@PathVariable Integer campaign_id){
         return campaignRepository.findByCampaignId(campaign_id);

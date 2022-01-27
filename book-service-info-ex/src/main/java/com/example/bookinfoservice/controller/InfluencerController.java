@@ -26,7 +26,11 @@ public class InfluencerController {
     public List<Influencer> getInfluencers(){
         return influencerRepository.findAll();
     }
-
+    @CrossOrigin()
+    @GetMapping(value ="/influencers/{influencer_id}", produces = "application/json")
+    public Influencer getInfluencerByInfluencerId(@PathVariable Integer influencer_id){
+        return influencerRepository.findByInfluencerId(influencer_id);
+    }
     @CrossOrigin()
     @GetMapping(value = "/users", produces = "application/json")
     public List<User> getUsers(){

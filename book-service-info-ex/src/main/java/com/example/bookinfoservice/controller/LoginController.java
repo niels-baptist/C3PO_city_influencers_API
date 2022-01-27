@@ -47,7 +47,7 @@ public class LoginController {
     public Influencer addInfluencer(@RequestBody Influencer influencer){
         return influencerRepository.save(influencer);
     }
-    @RequestMapping(value = "/employees/register", method = RequestMethod.POST,consumes =MediaType.APPLICATION_JSON_VALUE ,
+    @PostMapping(value = "/employees/register", consumes =MediaType.APPLICATION_JSON_VALUE ,
             headers = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Employee addEmployee(@RequestBody Employee employee){
