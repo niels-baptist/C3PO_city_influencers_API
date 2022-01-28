@@ -62,14 +62,6 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    public Employee_role getRoleId() {
-        return employee_role;
-    }
-
-    public void setRoleId(Employee_role roleId) {
-        this.employee_role = roleId;
-    }
-
     public User getUser() {
         return user;
     }

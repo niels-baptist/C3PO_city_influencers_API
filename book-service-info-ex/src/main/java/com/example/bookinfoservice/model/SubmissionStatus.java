@@ -12,7 +12,6 @@ public class SubmissionStatus {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-
     @Column(name = "\"status_id\"")
     private int statusId;
     @Column(name = "\"name\"")

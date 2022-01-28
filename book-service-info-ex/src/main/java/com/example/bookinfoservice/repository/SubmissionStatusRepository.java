@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SubmissionStatusRepository extends JpaRepository<SubmissionStatus, Integer> {
+    SubmissionStatus findByStatusId(int status_id);
 }

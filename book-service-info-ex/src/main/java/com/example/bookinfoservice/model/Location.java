@@ -39,6 +39,12 @@ public class Location {
         this.postalCode = postalCode;
     }
 
+    // constructor is used to create new Location
+    public Location(String name, String postalCode) {
+        this.name = name;
+        this.postalCode = postalCode;
+    }
+
     public Location() {
     }
 

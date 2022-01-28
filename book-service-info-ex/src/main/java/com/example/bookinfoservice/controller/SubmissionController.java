@@ -7,12 +7,21 @@ import com.example.bookinfoservice.model.SubmissionStatus;
 import com.example.bookinfoservice.repository.CampaignRepository;
 import com.example.bookinfoservice.repository.InfluencerRepository;
 import com.example.bookinfoservice.repository.SubmissionRepository;
+import com.example.bookinfoservice.repository.SubmissionStatusRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static java.lang.Integer.parseInt;
+
+
 
 @CrossOrigin
 @RestController
@@ -20,7 +29,11 @@ public class SubmissionController  {
     @Autowired
     SubmissionRepository submissionRepository;
     @Autowired
+    SubmissionStatusRepository submissionStatusRepository;
+    @Autowired
     CampaignRepository campaignRepository;
+    @Autowired
+    InfluencerRepository influencerRepository;
 
 
 
@@ -28,9 +41,22 @@ public class SubmissionController  {
     // CRUD submissions
     @GetMapping("/submissions")public List<Submission> getSubmissions(){return submissionRepository.findAll();}
 
+    @GetMapping("/submissions/{influencer_id}/{campaign_id}")public Submission getSubmissionsByInfluencerIdAndCampaignId(@PathVariable Map<String, String> json){
+        int influencer_id = parseInt(json.get("influencer_id"));
+        int campaign_id = parseInt(json.get("campaign_id"));
+        Submission submission = submissionRepository.findByInfIdAndCampId(influencer_id,campaign_id);
+        if (submission == null){
+            Campaign campaign = campaignRepository.findByCampaignId(campaign_id);
+            Influencer influencer = influencerRepository.findByInfluencerId(influencer_id);
+            if (campaign.getCampaignStatus().getStatusId() != 2){throw new ResponseStatusException(HttpStatus.FORBIDDEN,"The campaign was not open nor had the user a submission to the campaign.");}
+            submission = submissionRepository.save(new Submission("", "", submissionStatusRepository.findByStatusId(1),campaign ,influencer));
+        }
+        return submission;
+    }
+
     @PostMapping("/submissions")
     public Submission addSubmission(@RequestBody Submission submission){
-        return submissionRepository.save(new Submission(submission.getUrl(), submission.getDescription(), submission.getSubmissionStatus(), submission.getCampaign(), submission.getInfluencer()));
+        return submissionRepository.save(new Submission(submission.getUrl(), submission.getDescription(), submission.getSubmissionStatus(), submission.getCampaign(),submission.getInfluencer()));
     }
 
     @PutMapping("/submissions")

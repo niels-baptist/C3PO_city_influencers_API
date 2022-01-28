@@ -4,12 +4,13 @@ import com.example.bookinfoservice.model.Influencer;
 import com.example.bookinfoservice.model.Submission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface SubmissionRepository extends JpaRepository<Submission, Integer> {
-    List<Submission> findAllByInfluencerInfluencerId(int influecerId);
-    List<Submission> findAllByInfluencerInfluencerIdAndSubmissionStatus_StatusId(int influecerId, int statusId);
+    @Query(value = "SELECT * FROM nocaps.submission s INNER JOIN nocaps.campaign c ON c.campaign_id = s.campaign_id WHERE s.influencer_id = :influencer_id AND s.campaign_id= :campaign_id",nativeQuery = true)
+    Submission findByInfIdAndCampId(@Param("influencer_id") int influencer_id,@Param("campaign_id") int campaign_id);
 }

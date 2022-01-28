@@ -12,9 +12,8 @@ public class SocialMediaAccount {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"social_media_account_id\"")
     private int socialMediaAccountId;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="influencer_id", nullable=true)
-    private Influencer influencer;
+    @Column(name = "\"influencer_id\"")
+    private int influencerId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="platform_id", nullable=true)
     private SocialMediaPlatform platform;
@@ -26,9 +25,16 @@ public class SocialMediaAccount {
     public SocialMediaAccount() {
     }
 
-    public SocialMediaAccount(int social_media_accountId, Influencer influencer, SocialMediaPlatform platform, String name, String url) {
-        this.socialMediaAccountId = social_media_accountId;
-        this.influencer = influencer;
+    public SocialMediaAccount(int socialMediaAccountId, int influencer_id, SocialMediaPlatform platform, String name, String url) {
+        this.socialMediaAccountId = socialMediaAccountId;
+        this.influencerId = influencer_id;
+        this.platform = platform;
+        this.name = name;
+        this.url = url;
+    }
+
+    public SocialMediaAccount(int influencer_id, SocialMediaPlatform platform, String name, String url) {
+        this.influencerId = influencer_id;
         this.platform = platform;
         this.name = name;
         this.url = url;
@@ -41,6 +47,7 @@ public class SocialMediaAccount {
     public void setSocialMediaAccountId(int social_media_accountId) {
         this.socialMediaAccountId = social_media_accountId;
     }
+
 
 
     public String getName() {
@@ -59,12 +66,12 @@ public class SocialMediaAccount {
         this.url = url;
     }
 
-    public Influencer getInfluencer() {
-        return influencer;
+    public int getInfluencerId() {
+        return influencerId;
     }
 
-    public void setInfluencer(Influencer influencer) {
-        this.influencer = influencer;
+    public void setInfluencerId(int influencer_id) {
+        this.influencerId = influencer_id;
     }
 
     public SocialMediaPlatform getPlatform() {
@@ -74,4 +81,6 @@ public class SocialMediaAccount {
     public void setPlatform(SocialMediaPlatform platform) {
         this.platform = platform;
     }
+
+
 }

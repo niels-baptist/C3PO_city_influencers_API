@@ -29,6 +29,7 @@ public class Submission {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="\"influencer_id\"", nullable=true)
     private Influencer influencer;
+
     public Submission() {
     }
 

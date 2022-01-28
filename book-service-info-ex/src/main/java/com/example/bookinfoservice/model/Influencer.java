@@ -17,11 +17,10 @@ public class Influencer {
     private User user;
     @Column(name = "\"gender\"")
     private String gender;
+
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "influencer")
     private List<Submission> submissions;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "influencer")
-    private List<SocialMediaAccount> accounts;
 
     @ManyToMany
     @JoinTable(
@@ -30,11 +29,12 @@ public class Influencer {
             inverseJoinColumns = @JoinColumn(name = "domain_id"))
     Set<Domain> domains;
 
-    public Influencer(int influencerId, User user,Set<Domain> domains, String gender) {
+    public Influencer(int influencerId, User user, String gender, List<Submission> submissions, Set<Domain> domains) {
         this.influencerId = influencerId;
         this.user = user;
-        this.domains = domains;
         this.gender = gender;
+        this.submissions = submissions;
+        this.domains = domains;
     }
 
     public Influencer(User user, String gender) {
@@ -51,13 +51,6 @@ public class Influencer {
     public Influencer() {
     }
 
-    public int getinfluencerId() {
-        return influencerId;
-    }
-
-    public void setinfluencerId(int influencer_id) {
-        this.influencerId = influencer_id;
-    }
 
 
     public String getGender() {
@@ -85,4 +78,22 @@ public class Influencer {
     public void setDomains(Set<Domain> influencerDomains) {
         this.domains = influencerDomains;
     }
+
+    public int getInfluencerId() {
+        return influencerId;
+    }
+
+    public void setInfluencerId(int influencerId) {
+        this.influencerId = influencerId;
+    }
+
+    public List<Submission> getSubmissions() {
+        return submissions;
+    }
+
+    public void setSubmissions(List<Submission> submissions) {
+        this.submissions = submissions;
+    }
+
+
 }

@@ -57,4 +57,20 @@ public class SocialMediaPlatform {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public List<SocialMediaAccount> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<SocialMediaAccount> accounts) {
+        this.accounts = accounts;
+    }
+
+    public Set<Campaign> getCampaigns() {
+        return campaigns;
+    }
+
+    public void setCampaigns(Set<Campaign> campaigns) {
+        this.campaigns = campaigns;
+    }
 }

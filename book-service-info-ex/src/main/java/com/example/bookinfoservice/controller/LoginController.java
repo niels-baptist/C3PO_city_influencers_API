@@ -8,10 +8,7 @@ import com.example.bookinfoservice.repository.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 @CrossOrigin
@@ -31,20 +28,25 @@ public class LoginController {
     LocationRepository locationRepository;
 
     // // login function
-    @PostMapping("/users/login")
-    public boolean loginUser(@RequestBody String user_username, String user_password) {
-        String database_password = userRepository.getUserByUserName(user_username).getPassword();
-        return Objects.equals(database_password, user_password);
+    @GetMapping("/users/login/{user_username}/{user_password}")
+    @ResponseBody
+    public boolean loginUser(@PathVariable Map<String, String> json) {
+        String database_password = userRepository.findFirstByUserName(json.get("user_username")).getPassword();
+        return Objects.equals(database_password, json.get("user_password"));
     }
 
     @PostMapping("/influencers/login")
-    public boolean loginInfluencer(@RequestBody String user_username, String user_password) {
-        String database_password = userRepository.getUserByUserName(user_username).getPassword();
-        return Objects.equals(database_password, user_password);
+    @ResponseBody
+    public boolean loginInfluencer(@RequestBody Map<String, String> json) {
+        String database_password = userRepository.findFirstByUserName(json.get("user_username")).getPassword();
+        return Objects.equals(database_password, json.get("user_password"));
     }
 
-    @PostMapping("/employees/login")
-    public boolean loginEmployees(@RequestBody String user_username, String user_password) {
+    @RequestMapping(value = "/employees/login", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public boolean loginEmployees(@PathVariable("user_username") String user_username, String user_password) {
         String database_password = userRepository.getUserByUserName(user_username).getPassword();
         return Objects.equals(database_password, user_password);
     }
@@ -56,24 +58,13 @@ public class LoginController {
         return userRepository.getUserByUserName(user_name);
     }
 
-    @GetMapping("/users/id/{id}")
-    public User getUserById(@PathVariable Integer id){
-        return userRepository.getUserByUserId(id);
-    }
 
     @GetMapping("/employees/username/{user_name}")
     public Employee getEmployeeByUserName(@PathVariable String user_name){
         return employeeRepository.findAllByuserUserName(user_name).stream().findFirst().get();
     }
 
-    // // Employee CRUD
 
-    @PostMapping(value = "/employees/register", consumes =MediaType.APPLICATION_JSON_VALUE ,
-            headers = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Employee addEmployee(@RequestBody Employee employee){
-        return employeeRepository.save(new Employee(employee.getEmployee_role(),employee.getUser()));
-    }
 
 
 

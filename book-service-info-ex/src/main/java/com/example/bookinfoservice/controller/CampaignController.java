@@ -56,4 +56,9 @@ public class CampaignController  {
         return campaignRepository.save(new Campaign(campaign.getEmployee(), campaign.getLocation(), campaign.getCampaignStatus(), campaign.getName(), campaign.getDescription(), campaign.getFotoUrl(), campaign.getDomains(), campaign.getPlatforms()));
     }
 
+    @PutMapping("/campaigns")
+    public Campaign updateCampaign(@RequestBody Campaign campaign){
+        return campaignRepository.save(campaign);
+    }
+
 }

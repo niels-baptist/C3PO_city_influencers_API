@@ -32,6 +32,12 @@ public class Domain {
         this.description = description;
     }
 
+    // constructor used to create new Domain
+    public Domain(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public int getDomainId() {
         return domainId;
     }

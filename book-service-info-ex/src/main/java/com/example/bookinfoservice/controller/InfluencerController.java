@@ -1,14 +1,10 @@
 package com.example.bookinfoservice.controller;
 import com.example.bookinfoservice.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import com.example.bookinfoservice.repository.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -54,9 +50,34 @@ public class InfluencerController {
         influencerRepository.deleteById(influencer_id);
     }
 
+    // // SocialMediaAccount CRUD
+
+    @CrossOrigin()
+    @GetMapping(value ="/accounts/{influencer_id}", produces = "application/json")
+    public List<SocialMediaAccount> getSocialMediaAccounts(@PathVariable int influencer_id){
+        return socialMediaAccountRepository.findAllByInfluencerId(influencer_id);
+    }
+
+    @PostMapping(value ="/accounts", produces = "application/json")
+    @ResponseBody
+    public SocialMediaAccount addSocialMediaAccount(@RequestBody SocialMediaAccount socialMediaAccount){
+        return socialMediaAccountRepository.save(new SocialMediaAccount(socialMediaAccount.getInfluencerId(),socialMediaAccount.getPlatform(),socialMediaAccount.getName(),socialMediaAccount.getUrl()));
+    }
+
+    @PutMapping(value ="/accounts", produces = "application/json")
+    @ResponseBody
+    public SocialMediaAccount updateSocialMediaAccount(@RequestBody SocialMediaAccount socialMediaAccount){
+        return socialMediaAccountRepository.save(socialMediaAccount);
+    }
+
+    @CrossOrigin()
+    @DeleteMapping(value ="/accounts/{account_id}", produces = "application/json")
+    public void deleteSocialMediaAccount(@PathVariable int account_id){
+        socialMediaAccountRepository.deleteById(account_id);
+    }
 
 
-
+    // complexer get functions
 
     @GetMapping("/influencers/platform/{platform_id}")
     public List<Influencer> getInfluencerByPlatform(@PathVariable Integer platform_id){
@@ -72,10 +93,6 @@ public class InfluencerController {
         return influencerRepository.findAllByuserUserName(user_name).stream().findFirst().get();
     }
 
-    @PostMapping("/influencers/addDomain")
-    public Influencer addDomains(@RequestBody Influencer influencer){
-        return influencerRepository.save(new Influencer(influencer.getUser(),influencer.getGender()));
-    }
 
 }
 

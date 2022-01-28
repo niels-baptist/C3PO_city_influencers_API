@@ -12,4 +12,5 @@ import java.util.List;
 public interface SocialMediaAccountRepository extends JpaRepository<SocialMediaAccount, Integer> {
     @Query(value="select a from SocialMediaAccount a where a.platform.social_media_platformId=?1")
     List<SocialMediaAccount> findAllByPlatformPlatformId(int platform_id);
+    List<SocialMediaAccount> findAllByInfluencerId(int influencer_id);
 }
