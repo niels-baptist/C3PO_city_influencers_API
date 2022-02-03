@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface InfluencerRepository extends JpaRepository<Influencer, Integer> {
     Influencer findByInfluencerId(int influencer_id);
-    List<Influencer> findAll();
+    List<Influencer> findAllBy();
     @Query(value="select i from Influencer i where i.user.userName=?1",nativeQuery = false)
     List<Influencer> findAllByuserUserName(String user_email);
 
@@ -18,5 +18,8 @@ public interface InfluencerRepository extends JpaRepository<Influencer, Integer>
     @Query(value = "SELECT * FROM nocaps.influencer i INNER JOIN nocaps.social_media_account s ON i.influencer_id = s.influencer_id WHERE s.social_media_platform_id = ?1",nativeQuery = true)
     List<Influencer> findAllByPlatformId(int platformId);
     List<Influencer> findAllByDomainsContaining(Domain domain);
+
+    @Query(value = "SELECT * FROM nocaps.influencer i INNER JOIN nocaps.submission s ON i.influencer_id = s.influencer_id WHERE s.campaign_id = ?1",nativeQuery = true)
+    List<Influencer> findAllByCampaign(int campaign_id);
 
 }

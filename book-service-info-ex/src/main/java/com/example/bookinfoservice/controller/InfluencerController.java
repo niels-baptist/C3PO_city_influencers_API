@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.bookinfoservice.repository.*;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @CrossOrigin
@@ -22,7 +24,9 @@ public class InfluencerController {
     @CrossOrigin()
     @GetMapping(value ="/influencers", produces = "application/json")
     public List<Influencer> getInfluencers(){
-        return influencerRepository.findAll();
+        List<Influencer> influencers = influencerRepository.findAll();
+        influencers.sort(Comparator.comparing(i -> i.getUser().getFirstname()));
+        return influencers;
     }
 
     @CrossOrigin()
@@ -33,15 +37,17 @@ public class InfluencerController {
 
     @PostMapping("/influencers/register")
     public Influencer registerInfluencer(@RequestBody Influencer influencer){
-        return influencerRepository.save(new Influencer(influencer.getUser(),influencer.getGender(),influencer.getDomains()));
+        return influencerRepository.save(new Influencer(influencer.getPictureUrl(),influencer.getGender(),influencer.getUser(),influencer.getDomains()));
     }
     @PostMapping("/influencers")
     public Influencer addInfluencer(@RequestBody Influencer influencer){
-        return influencerRepository.save(new Influencer(influencer.getUser(),influencer.getGender(),influencer.getDomains()));
+        return influencerRepository.save(new Influencer(influencer.getPictureUrl(),influencer.getGender(),influencer.getUser(),influencer.getDomains()));
     }
 
     @PutMapping("/influencers")
     public Influencer updateInfluencer(@RequestBody Influencer influencer){
+        // automaticaly saves the user as well
+        influencer.setUser(userRepository.save(influencer.getUser()));
         return influencerRepository.save(influencer);
     }
 
@@ -92,7 +98,11 @@ public class InfluencerController {
     public Influencer getInfluencerByUserName(@PathVariable String user_name){
         return influencerRepository.findAllByuserUserName(user_name).stream().findFirst().get();
     }
-
+    @CrossOrigin()
+    @GetMapping(value ="/influencers/campaign/{campaign_id}", produces = "application/json")
+    public List<Influencer> getInfluencerByCampaign(@PathVariable Integer campaign_id){
+        return influencerRepository.findAllByCampaign(campaign_id);
+    }
 
 }
 

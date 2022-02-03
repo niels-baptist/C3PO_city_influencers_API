@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name="submission", schema = "nocaps")
-@JsonIgnoreProperties(value = {"campaign","influencer","hibernateLazyInitializer"}, allowSetters = true)
+@JsonIgnoreProperties(value = {"campaign","hibernateLazyInitializer"}, allowSetters = true)
 public class Submission {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

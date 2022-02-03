@@ -50,4 +50,10 @@ public class SharedController  {
     @GetMapping("/campaignstatuses")
     public List<CampaignStatus> getAllCampaignStatuses(){return campaignStatusRepository.findAll();
     }
+
+    @Autowired
+    Employee_roleRepository employee_roleRepository;
+    @GetMapping("/employeeRoles")
+    public List<Employee_role> getAllEmployeeRoles(){return employee_roleRepository.findAll();
+    }
 }

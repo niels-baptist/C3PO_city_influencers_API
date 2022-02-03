@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 public class EmployeeController {
     @Autowired
     EmployeeRepository employeeRepository;
+    @Autowired
+    UserRepository userRepository;
 
     // // Employee CRUD
 
@@ -27,17 +29,23 @@ public class EmployeeController {
         return employeeRepository.findByEmployeeId(employee_id);
     }
 
-    @PostMapping(value = "/employees/register", consumes =MediaType.APPLICATION_JSON_VALUE ,
+    @PostMapping(value = "/employees", consumes =MediaType.APPLICATION_JSON_VALUE ,
             headers = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Employee addEmployee(@RequestBody Employee employee){
+        // automaticaly saves the user as well
+        User user = employee.getUser();
+        employee.setUser(userRepository.save(new User(user.getLocation(), user.getEmail(),user.getPassword(), user.getFirstname(), user.getLastname(), user.getUserName(), user.getBirthdate())));
         return employeeRepository.save(new Employee(employee.getEmployee_role(),employee.getUser()));
     }
 
     @PutMapping(value = "/employees", consumes =MediaType.APPLICATION_JSON_VALUE ,
             headers = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
+
     public Employee updateEmployee(@RequestBody Employee employee){
+        // automaticaly saves the user as well
+        employee.setUser(userRepository.save(employee.getUser()));
         return employeeRepository.save(employee);
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-    List<Employee> findAll();
+    List<Employee> findAllBy();
     Employee findByEmployeeId(int employee_id);
     @Query(value="select e from Employee e where e.user.userName=?1")
     List<Employee> findAllByuserUserName(String user_email);
