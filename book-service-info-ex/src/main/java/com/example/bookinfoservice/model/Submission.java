@@ -41,6 +41,7 @@ public class Submission {
         this.influencer = influencer;
     }
 
+
     public int getSubmissionId() {
         return submissionId;
     }

@@ -66,6 +66,8 @@ public class CampaignController  {
     public Campaign updateCampaign(@RequestBody Campaign campaign){
         return campaignRepository.save(campaign);
     }
+
+
     @DeleteMapping(value = "/campaigns/{campaign_id}", produces = "application/json")
     public void removeCampaign(@PathVariable Integer campaign_id){
         campaignRepository.deleteById(campaign_id);
