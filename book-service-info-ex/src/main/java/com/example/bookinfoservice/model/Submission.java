@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="submission", schema = "nocaps")
+@Table(name="submission", schema = "public")
 @JsonIgnoreProperties(value = {"campaign","hibernateLazyInitializer"}, allowSetters = true)
 public class Submission {
     @Id

@@ -7,10 +7,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name="campaign", schema = "nocaps")
+@Table(name="campaign", schema = "public")
 @JsonIgnoreProperties(value = {"socialMediaAccounts","hibernateLazyInitializer"}, allowSetters = true)
 public class Campaign {
     @Id
@@ -46,24 +45,35 @@ public class Campaign {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "campaign")
     private List<Submission> submissions;
 
-    @ManyToMany
-    @JoinTable(
-            name = "campaign_domain",
-            joinColumns = @JoinColumn(name = "campaign_id"),
-            inverseJoinColumns = @JoinColumn(name = "domain_id"))
-    Set<Domain> domains;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="\"domain_id\"")
+    private Domain domain;
 
-    @ManyToMany
-    @JoinTable(
-            name = "campaign_platform",
-            joinColumns = @JoinColumn(name = "campaign_id"),
-            inverseJoinColumns = @JoinColumn(name = "social_media_platform_id"))
-    Set<SocialMediaPlatform> platforms;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="\"social_media_platform_id\"")
+    private SocialMediaPlatform socialMediaPlatform;
+
+
+
 
     public Campaign() {
     }
 
-    public Campaign(Employee employee, String name, String description, String fotoUrl, Date startDate, Date endDate, Location location, CampaignStatus campaignStatus, List<Submission> submissions, Set<Domain> domains, Set<SocialMediaPlatform> platforms) {
+    public Campaign(Employee employee, String name, String description, String fotoUrl, Date startDate, Date endDate, Location location, CampaignStatus campaignStatus, Domain domain, SocialMediaPlatform socialMediaPlatform) {
+        this.employee = employee;
+        this.name = name;
+        this.description = description;
+        this.fotoUrl = fotoUrl;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.location = location;
+        this.campaignStatus = campaignStatus;
+        this.domain = domain;
+        this.socialMediaPlatform = socialMediaPlatform;
+    }
+
+    public Campaign(int campaignId, Employee employee, String name, String description, String fotoUrl, Date startDate, Date endDate, Location location, CampaignStatus campaignStatus, List<Submission> submissions, Domain domain, SocialMediaPlatform platform) {
+        this.campaignId = campaignId;
         this.employee = employee;
         this.name = name;
         this.description = description;
@@ -73,9 +83,10 @@ public class Campaign {
         this.location = location;
         this.campaignStatus = campaignStatus;
         this.submissions = submissions;
-        this.domains = domains;
-        this.platforms = platforms;
+        this.domain = domain;
+        this.socialMediaPlatform = platform;
     }
+
 
     public int getCampaignId() {
         return campaignId;
@@ -133,14 +144,6 @@ public class Campaign {
         this.fotoUrl = fotoUrl;
     }
 
-    public Set<Domain> getDomains() {
-        return domains;
-    }
-
-    public void setDomains(Set<Domain> domains) {
-        this.domains = domains;
-    }
-
     public List<Submission> getSubmissions() {
         return submissions;
     }
@@ -149,12 +152,20 @@ public class Campaign {
         this.submissions = submissions;
     }
 
-    public Set<SocialMediaPlatform> getPlatforms() {
-        return platforms;
+    public Domain getDomain() {
+        return domain;
     }
 
-    public void setPlatforms(Set<SocialMediaPlatform> platforms) {
-        this.platforms = platforms;
+    public void setDomain(Domain domain) {
+        this.domain = domain;
+    }
+
+    public SocialMediaPlatform getSocialMediaPlatform() {
+        return socialMediaPlatform;
+    }
+
+    public void setSocialMediaPlatform(SocialMediaPlatform platform) {
+        this.socialMediaPlatform = platform;
     }
 
     public Date getStartDate() {
@@ -173,18 +184,5 @@ public class Campaign {
         this.endDate = endDate;
     }
 
-    public Campaign(int campaignId, Employee employee, String name, String description, String fotoUrl, Date startDate, Date endDate, Location location, CampaignStatus campaignStatus, List<Submission> submissions, Set<Domain> domains, Set<SocialMediaPlatform> platforms) {
-        this.campaignId = campaignId;
-        this.employee = employee;
-        this.name = name;
-        this.description = description;
-        this.fotoUrl = fotoUrl;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.location = location;
-        this.campaignStatus = campaignStatus;
-        this.submissions = submissions;
-        this.domains = domains;
-        this.platforms = platforms;
-    }
+
 }

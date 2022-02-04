@@ -1,12 +1,16 @@
 package com.example.bookinfoservice.Form;
 
+import com.example.bookinfoservice.model.*;
+
 import java.util.Date;
+import java.util.Locale;
 
 public class CampaignForm {
     private int campaignId;
     private int employeeId;
     private int domainId;
     private int platformId;
+    private int campaignStatusId;
     private String fotoUrl;
     private String name;
     private String description;
@@ -14,17 +18,28 @@ public class CampaignForm {
     private Date endDate;
     private int locationId;
 
-    public CampaignForm(int campaignId, int employeeId, int domainId, int platformId, String fotoUrl, String name, String description, Date startDate, Date endDate, int locationId) {
+    public CampaignForm(int campaignId, int employeeId, int domainId, int platformId, int campaignStatusId, String fotoUrl, String name, String description, Date startDate, Date endDate, int locationId) {
         this.campaignId = campaignId;
         this.employeeId = employeeId;
         this.domainId = domainId;
         this.platformId = platformId;
+        this.campaignStatusId = campaignStatusId;
         this.fotoUrl = fotoUrl;
         this.name = name;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.locationId = locationId;
+    }
+
+    public Campaign createCampaign(Employee employee, Location location, CampaignStatus campaignStatus, Domain domain, SocialMediaPlatform platform){
+        return new Campaign(employee, name, description, fotoUrl,startDate,endDate, location, campaignStatus, domain, platform);
+    }
+
+    public Campaign getCampaign(Employee employee, Location location, CampaignStatus campaignStatus, Domain domain, SocialMediaPlatform platform){
+        Campaign campaign = new Campaign(employee, name, description, fotoUrl,startDate,endDate, location, campaignStatus, domain, platform);
+        campaign.setCampaignId(campaignId);
+        return campaign;
     }
 
     public int getCampaignId() {
@@ -105,5 +120,13 @@ public class CampaignForm {
 
     public void setLocationId(int locationId) {
         this.locationId = locationId;
+    }
+
+    public int getCampaignStatusId() {
+        return campaignStatusId;
+    }
+
+    public void setCampaignStatusId(int campaignStatusId) {
+        this.campaignStatusId = campaignStatusId;
     }
 }

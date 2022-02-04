@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CampaignStatusRepository extends JpaRepository<CampaignStatus, Integer> {
+    CampaignStatus findByStatusId(int statusId);
 }

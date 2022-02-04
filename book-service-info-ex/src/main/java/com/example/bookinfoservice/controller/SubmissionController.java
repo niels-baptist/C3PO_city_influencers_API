@@ -84,7 +84,7 @@ public class SubmissionController  {
             Campaign campaign = campaignRepository.findByCampaignId(campaign_id);
             Influencer influencer = influencerRepository.findByInfluencerId(influencer_id);
             if (campaign.getCampaignStatus().getStatusId() != 2){throw new ResponseStatusException(HttpStatus.FORBIDDEN,"The campaign was not open nor had the user a submission to the campaign.");}
-            submission = submissionRepository.save(new Submission("", "", submissionStatusRepository.findByStatusId(1),campaign ,influencer));
+            submission = submissionRepository.save(new Submission("placeholder-image.png", "", submissionStatusRepository.findByStatusId(1),campaign ,influencer));
         }
         return submission;
     }

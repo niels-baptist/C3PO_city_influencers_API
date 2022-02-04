@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="employee", schema = "nocaps")
+@Table(name="employee", schema = "public")
 @JsonIgnoreProperties(value = {"campaigns","hibernateLazyInitializer"}, allowSetters = true)
 public class Employee {
     @Id

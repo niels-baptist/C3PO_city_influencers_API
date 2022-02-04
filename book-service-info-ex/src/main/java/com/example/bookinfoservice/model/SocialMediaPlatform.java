@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name="social_media_platform", schema = "nocaps")
+@Table(name="social_media_platform", schema = "public")
 @JsonIgnoreProperties(value = {"accounts","campaigns","hibernateLazyInitializer"}, allowSetters = true)
 public class SocialMediaPlatform {
     @Id
@@ -22,7 +22,7 @@ public class SocialMediaPlatform {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "platform")
     private List<SocialMediaAccount> accounts;
 
-    @ManyToMany(mappedBy = "platforms")
+    @OneToMany(mappedBy = "socialMediaPlatform")
     Set<Campaign> campaigns;
 
     public SocialMediaPlatform(int social_media_platformId, String name, String url) {
