@@ -33,6 +33,12 @@ public class Employee {
         this.campaigns = campaigns;
     }
 
+    public Employee(int employeeId, Employee_role employee_role, User user) {
+        this.employeeId = employeeId;
+        this.employee_role = employee_role;
+        this.user = user;
+    }
+
     public Employee(Employee_role employee_role, User user) {
         this.employee_role = employee_role;
         this.user = user;

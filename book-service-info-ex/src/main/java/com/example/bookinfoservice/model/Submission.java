@@ -89,6 +89,13 @@ public class Submission {
         this.description = description;
     }
 
+    public Submission(int submissionId, String url, String description, SubmissionStatus submissionStatus) {
+        this.submissionId = submissionId;
+        this.url = url;
+        this.description = description;
+        this.submissionStatus = submissionStatus;
+    }
+
     public Submission(int submissionId, String url, String description, SubmissionStatus submissionStatus, Campaign campaign, Influencer influencer) {
         this.submissionId = submissionId;
         this.url = url;

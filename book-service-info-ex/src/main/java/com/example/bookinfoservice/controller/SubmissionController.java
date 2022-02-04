@@ -46,6 +46,11 @@ public class SubmissionController  {
         return submissionRepository.save(new Submission(submission.getUrl(), submission.getDescription(), submission.getSubmissionStatus(), submission.getCampaign(),submission.getInfluencer()));
     }
 
+    @GetMapping("/submissions/{submission_id}")
+    public Submission addSubmission(@PathVariable int submission_id){
+        return submissionRepository.findBySubmissionId(submission_id);
+    }
+
     @PostMapping("/submissions/{campaign_id}")
     public Submission addSubmissionToCampaign(@RequestBody Submission submission, @PathVariable int campaign_id){
         submission.setCampaign(campaignRepository.findByCampaignId(campaign_id));
@@ -54,7 +59,11 @@ public class SubmissionController  {
 
     @PutMapping("/submissions")
     public Submission updateSubmission(@RequestBody Submission submission){
-        return submissionRepository.save(submission);
+        Submission localSubmission = submissionRepository.findBySubmissionId(submission.getSubmissionId());
+        localSubmission.setUrl(submission.getUrl());
+        localSubmission.setDescription(submission.getDescription());
+        localSubmission.setSubmissionStatus(submission.getSubmissionStatus());
+        return submissionRepository.save(localSubmission);
     }
     @DeleteMapping("/submissions/{submission_id}")
     public void deleteSubmission(@PathVariable int submission_id){
