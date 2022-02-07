@@ -11,12 +11,12 @@ public class CampaignForm {
     private int domainId;
     private int platformId;
     private int campaignStatusId;
+    private int locationId;
     private String fotoUrl;
     private String name;
     private String description;
     private Date startDate;
     private Date endDate;
-    private int locationId;
 
     public CampaignForm(int campaignId, int employeeId, int domainId, int platformId, int campaignStatusId, String fotoUrl, String name, String description, Date startDate, Date endDate, int locationId) {
         this.campaignId = campaignId;

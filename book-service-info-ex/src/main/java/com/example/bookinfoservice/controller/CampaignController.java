@@ -76,7 +76,7 @@ public class CampaignController  {
         Location location = locationRepository.findByLocationId(campaignForm.getLocationId());
         CampaignStatus status = campaignStatusRepository.findByStatusId(campaignForm.getCampaignStatusId());
         Domain domain = domainRepository.findByDomainId(campaignForm.getDomainId());
-        SocialMediaPlatform socialMediaPlatform = socialMediaPlatformRepository.findBySocial_media_platformId(campaignForm.getPlatformId());
+        SocialMediaPlatform socialMediaPlatform = socialMediaPlatformRepository.findById(campaignForm.getPlatformId()).get();;
         Campaign campaign = campaignForm.createCampaign(employee,location,status,domain,socialMediaPlatform);
         return campaignRepository.save(campaign);
     }
@@ -92,7 +92,7 @@ public class CampaignController  {
         Location location = locationRepository.findByLocationId(campaignForm.getLocationId());
         CampaignStatus status = campaignStatusRepository.findByStatusId(campaignForm.getCampaignStatusId());
         Domain domain = domainRepository.findByDomainId(campaignForm.getDomainId());
-        SocialMediaPlatform socialMediaPlatform = socialMediaPlatformRepository.findBySocial_media_platformId(campaignForm.getPlatformId());
+        SocialMediaPlatform socialMediaPlatform = socialMediaPlatformRepository.findById(campaignForm.getPlatformId()).get();
         Campaign campaign = campaignForm.getCampaign(employee,location,status,domain,socialMediaPlatform);
         campaign.setSubmissions(campaignRepository.findByCampaignId(campaignForm.getCampaignId()).getSubmissions());
         return campaignRepository.save(campaign);

@@ -75,10 +75,9 @@ public class SubmissionController  {
         return submissionRepository.findAllByInfluencerInfluencerId(influencer_id);
     }
 
-    @GetMapping("/submissions/{influencer_id}/{campaign_id}")public Submission getSubmissionsByInfluencerIdAndCampaignId(@PathVariable Map<String, String> json){
+    @GetMapping("/submissions/{influencer_id}/{campaign_id}")public Submission getSubmissionsByInfluencerIdAndCampaignId(@PathVariable int influencer_id, @PathVariable int campaign_id){
         // used to join a campaign and create a submission
-        int influencer_id = parseInt(json.get("influencer_id"));
-        int campaign_id = parseInt(json.get("campaign_id"));
+
         Submission submission = submissionRepository.findByInfIdAndCampId(influencer_id,campaign_id);
         if (submission == null){
             Campaign campaign = campaignRepository.findByCampaignId(campaign_id);
@@ -90,10 +89,8 @@ public class SubmissionController  {
     }
 
     @PostMapping("/submissions/{influencer_id}/{campaign_id}")
-    public Submission createSubmissionsByInfluencerIdAndCampaignId(@PathVariable Map<String, String> json){
+    public Submission createSubmissionsByInfluencerIdAndCampaignId(@PathVariable int influencer_id, @PathVariable int campaign_id){
         // used to join a campaign and create a submission
-        int influencer_id = parseInt(json.get("influencer_id"));
-        int campaign_id = parseInt(json.get("campaign_id"));
         Submission submission = submissionRepository.findByInfIdAndCampId(influencer_id,campaign_id);
         if (submission == null){
             Campaign campaign = campaignRepository.findByCampaignId(campaign_id);

@@ -15,11 +15,11 @@ public interface InfluencerRepository extends JpaRepository<Influencer, Integer>
     List<Influencer> findAllByuserUserName(String user_email);
 
     // use of a native sql query, this is due to the necesatie of the join of the 2 tables. Else there would have to be 2 querys.
-    @Query(value = "SELECT * FROM nocaps.influencer i INNER JOIN nocaps.social_media_account s ON i.influencer_id = s.influencer_id WHERE s.social_media_platform_id = ?1",nativeQuery = true)
+    @Query(value = "SELECT * FROM public.influencer i INNER JOIN public.social_media_account s ON i.influencer_id = s.influencer_id WHERE s.social_media_platform_id = ?1",nativeQuery = true)
     List<Influencer> findAllByPlatformId(int platformId);
     List<Influencer> findAllByDomainsContaining(Domain domain);
 
-    @Query(value = "SELECT * FROM nocaps.influencer i INNER JOIN nocaps.submission s ON i.influencer_id = s.influencer_id WHERE s.campaign_id = ?1",nativeQuery = true)
+    @Query(value = "SELECT * FROM public.influencer i INNER JOIN public.submission s ON i.influencer_id = s.influencer_id WHERE s.campaign_id = ?1",nativeQuery = true)
     List<Influencer> findAllByCampaign(int campaign_id);
 
 }

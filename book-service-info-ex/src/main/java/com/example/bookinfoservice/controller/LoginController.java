@@ -51,17 +51,15 @@ public class LoginController {
         return Objects.equals(database_password, user_password);
     }
 
-    @RequestMapping(value = "/employees/login/returnsId", method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/employees/login/returnsId")
     @ResponseBody
-    public Employee loginEmployeesWithReturn(@PathVariable("user_username") String user_username, String user_password) {
-        User user = userRepository.getUserByUserName(user_username);
+    public int loginEmployeesWithReturn(@RequestBody Map<String, String> json) {
+        User user = userRepository.getUserByUserName(json.get("user_username"));
         String database_password = user.getPassword();
-        if(Objects.equals(database_password, user_password)){
-            return employeeRepository.findByUserEquals(user);
+        if(Objects.equals(database_password, json.get("user_password"))){
+            return employeeRepository.findByUserEquals(user).getEmployeeId();
         }else{
-            return null;
+            return 0;
         }
     }
 
