@@ -98,6 +98,12 @@ public class InfluencerController {
     public Influencer getInfluencerByUserName(@PathVariable String user_name){
         return influencerRepository.findAllByuserUserName(user_name).stream().findFirst().get();
     }
+
+    @GetMapping("/influencers/location/{location_id}")
+    public List<Influencer> getInfluencerByLocationId(@PathVariable Integer location_id){
+        return influencerRepository.findallUsersByLocationId(location_id);
+    }
+
     @CrossOrigin()
     @GetMapping(value ="/influencers/campaign/{campaign_id}", produces = "application/json")
     public List<Influencer> getInfluencerByCampaign(@PathVariable Integer campaign_id){

@@ -24,6 +24,12 @@ public class EmployeeController {
     public List<Employee> getEmployees(){
         return employeeRepository.findAll();
     }
+
+    @GetMapping("/employees/location/{location_id}")
+    public List<Employee> getEmployeesByLocationId(@PathVariable Integer location_id){
+        return employeeRepository.findallUsersByLocationId(location_id);
+    }
+
     @GetMapping("/employees/{employee_id}")
     public Employee getEmployee(@PathVariable int employee_id){
         return employeeRepository.findByEmployeeId(employee_id);

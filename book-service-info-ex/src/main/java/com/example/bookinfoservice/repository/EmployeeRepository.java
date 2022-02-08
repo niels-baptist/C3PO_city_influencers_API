@@ -12,6 +12,10 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     List<Employee> findAllBy();
     Employee findByEmployeeId(int employee_id);
+
     @Query(value="select e from Employee e where e.user.userName=?1")
     List<Employee> findAllByuserUserName(String user_email);
+
+    @Query(value = "SELECT * FROM nocaps.employee e INNER JOIN nocaps.user u ON e.user_id = u.user_id WHERE u.location.location_id = ?1",nativeQuery = true)
+    List<Employee> findallUsersByLocationId(int location_id);
 }
