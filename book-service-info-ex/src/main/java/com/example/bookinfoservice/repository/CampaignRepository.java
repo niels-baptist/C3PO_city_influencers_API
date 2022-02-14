@@ -20,4 +20,6 @@ public interface CampaignRepository extends JpaRepository<Campaign, Integer> {
     @Query(value = "SELECT * FROM public.campaign c INNER JOIN nocaps.submission s on s.campaign_id = c.campaign_id WHERE s.status_id = :statusId AND s.influencer_id = :influencer_id AND c.status_id = :campaignStatus",nativeQuery = true)
     List<Campaign> findAllByStatusIdAndInfluencerId(@Param("statusId") int status_id, @Param("influencer_id") int influencer_id,
                                                     @Param("campaignStatus") int campaign_status_id);
+    @Query(value = "SELECT * FROM public.campaign c WHERE c.location_id = :location_id",nativeQuery = true)
+    List<Campaign> findAllByLocationId(int location_id);
 }

@@ -34,6 +34,11 @@ public class EmployeeController {
         return employeeRepository.findByEmployeeId(employee_id);
     }
 
+    @GetMapping("/employees/location/{location_id}")
+    public List<Employee> getEmployeesByLocationId(@PathVariable Integer location_id){
+        return employeeRepository.findallUsersByLocationId(location_id);
+    }
+
     @PostMapping(value = "/employees")
     @ResponseBody
     public Employee addEmployee(@RequestBody Employee employee){

@@ -40,6 +40,11 @@ public class CampaignController  {
         return campaignRepository.findAll();
     }
 
+    @GetMapping(value = "/campaigns/location/{location_id}", produces = "application/json")
+    public List<Campaign> getCampaignsByLocationId(@PathVariable int location_id){
+        return campaignRepository.findAllByLocationId(location_id);
+    }
+
     @GetMapping(value = "/campaigns/{campaign_id}", produces = "application/json")
     public Campaign getCampaignByCampaignId(@PathVariable Integer campaign_id){
         return campaignRepository.findByCampaignId(campaign_id);
@@ -54,7 +59,6 @@ public class CampaignController  {
     @GetMapping("/campaigns/recomended/{influencer_id}")
     public List<Campaign> getRecomendedCampaignsByInfluencerId(@PathVariable Integer influencer_id){
         return campaignRepository.findAllByStatusIdAndInfluencerId(1,influencer_id,2);
-
     }
 
     @GetMapping("/campaigns/open/{influencer_id}")
@@ -76,7 +80,7 @@ public class CampaignController  {
         Location location = locationRepository.findByLocationId(campaignForm.getLocationId());
         CampaignStatus status = campaignStatusRepository.findByStatusId(campaignForm.getCampaignStatusId());
         Domain domain = domainRepository.findByDomainId(campaignForm.getDomainId());
-        SocialMediaPlatform socialMediaPlatform = socialMediaPlatformRepository.findById(campaignForm.getPlatformId()).get();;
+        SocialMediaPlatform socialMediaPlatform = socialMediaPlatformRepository.findByPlatformId(campaignForm.getPlatformId());
         Campaign campaign = campaignForm.createCampaign(employee,location,status,domain,socialMediaPlatform);
         return campaignRepository.save(campaign);
     }
@@ -92,7 +96,7 @@ public class CampaignController  {
         Location location = locationRepository.findByLocationId(campaignForm.getLocationId());
         CampaignStatus status = campaignStatusRepository.findByStatusId(campaignForm.getCampaignStatusId());
         Domain domain = domainRepository.findByDomainId(campaignForm.getDomainId());
-        SocialMediaPlatform socialMediaPlatform = socialMediaPlatformRepository.findById(campaignForm.getPlatformId()).get();
+        SocialMediaPlatform socialMediaPlatform = socialMediaPlatformRepository.findByPlatformId(campaignForm.getPlatformId());
         Campaign campaign = campaignForm.getCampaign(employee,location,status,domain,socialMediaPlatform);
         campaign.setSubmissions(campaignRepository.findByCampaignId(campaignForm.getCampaignId()).getSubmissions());
         return campaignRepository.save(campaign);

@@ -22,4 +22,7 @@ public interface InfluencerRepository extends JpaRepository<Influencer, Integer>
     @Query(value = "SELECT * FROM public.influencer i INNER JOIN public.submission s ON i.influencer_id = s.influencer_id WHERE s.campaign_id = ?1",nativeQuery = true)
     List<Influencer> findAllByCampaign(int campaign_id);
 
+    @Query(value = "SELECT * FROM public.influencer i INNER JOIN public.user u ON i.user_id = u.user_id WHERE u.location_id = ?1",nativeQuery = true)
+    List<Influencer> findallUsersByLocationId(int location_id);
+
 }

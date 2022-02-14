@@ -37,7 +37,7 @@ public class CampaignForm {
     }
 
     public Campaign getCampaign(Employee employee, Location location, CampaignStatus campaignStatus, Domain domain, SocialMediaPlatform platform){
-        Campaign campaign = new Campaign(employee, name, description, fotoUrl,startDate,endDate, location, campaignStatus, domain, platform);
+        Campaign campaign = new Campaign(campaignId,employee, name, description, fotoUrl,startDate,endDate, location, campaignStatus,null, domain, platform);
         campaign.setCampaignId(campaignId);
         return campaign;
     }

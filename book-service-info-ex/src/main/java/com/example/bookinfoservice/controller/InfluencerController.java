@@ -29,6 +29,8 @@ public class InfluencerController {
         return influencers;
     }
 
+
+
     @CrossOrigin()
     @GetMapping(value ="/influencers/{influencer_id}", produces = "application/json")
     public Influencer getInfluencerByInfluencerId(@PathVariable Integer influencer_id){
@@ -102,6 +104,11 @@ public class InfluencerController {
     @GetMapping(value ="/influencers/campaign/{campaign_id}", produces = "application/json")
     public List<Influencer> getInfluencerByCampaign(@PathVariable Integer campaign_id){
         return influencerRepository.findAllByCampaign(campaign_id);
+    }
+
+    @GetMapping("/influencers/location/{location_id}")
+    public List<Influencer> getInfluencerByLocationId(@PathVariable Integer location_id){
+        return influencerRepository.findallUsersByLocationId(location_id);
     }
 
 }

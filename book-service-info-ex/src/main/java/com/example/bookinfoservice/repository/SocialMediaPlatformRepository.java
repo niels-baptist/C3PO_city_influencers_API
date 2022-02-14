@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SocialMediaPlatformRepository extends JpaRepository<SocialMediaPlatform, Integer> {
 
+    SocialMediaPlatform findByPlatformId(int platformId);
 }
