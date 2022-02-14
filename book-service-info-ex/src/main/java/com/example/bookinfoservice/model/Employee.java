@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="employee", schema = "nocaps")
+@Table(name="employee", schema = "public")
 @JsonIgnoreProperties(value = {"campaigns","hibernateLazyInitializer"}, allowSetters = true)
 public class Employee {
     @Id
@@ -31,6 +31,12 @@ public class Employee {
         this.employee_role = employee_role;
         this.user = user;
         this.campaigns = campaigns;
+    }
+
+    public Employee(int employeeId, Employee_role employee_role, User user) {
+        this.employeeId = employeeId;
+        this.employee_role = employee_role;
+        this.user = user;
     }
 
     public Employee(Employee_role employee_role, User user) {

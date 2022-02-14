@@ -8,7 +8,7 @@ import java.util.List;
 import static javax.persistence.CascadeType.ALL;
 
 @Entity
-@Table(name="employee_role", schema = "nocaps")
+@Table(name="employee_role", schema = "public")
 @JsonIgnoreProperties(value = {"employees","hibernateLazyInitializer"}, allowSetters = true)
 public class Employee_role {
     @Id

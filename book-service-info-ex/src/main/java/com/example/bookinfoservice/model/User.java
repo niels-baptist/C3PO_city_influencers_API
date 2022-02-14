@@ -9,7 +9,7 @@ import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.ALL;
 
 @Entity
-@Table(name="user", schema = "nocaps")
+@Table(name="user", schema = "public")
 @JsonIgnoreProperties(value = {"influencer","employee","hibernateLazyInitializer"}, allowSetters = true)
 public class User {
     @Id
@@ -52,6 +52,17 @@ public class User {
         this.birthdate = birthdate;
         this.influencer = influencer;
         this.employee = employee;
+    }
+
+    public User(int userId, Location location, String email, String password, String firstname, String lastname, String userName, Date birthdate) {
+        this.userId = userId;
+        this.location = location;
+        this.email = email;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.userName = userName;
+        this.birthdate = birthdate;
     }
 
     public User(Location location, String email, String password, String firstname, String lastname, String userName, Date birthdate) {

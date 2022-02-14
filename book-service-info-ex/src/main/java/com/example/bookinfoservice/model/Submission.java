@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="submission", schema = "nocaps")
+@Table(name="submission", schema = "public")
 @JsonIgnoreProperties(value = {"campaign","hibernateLazyInitializer"}, allowSetters = true)
 public class Submission {
     @Id
@@ -40,6 +40,7 @@ public class Submission {
         this.campaign = campaign;
         this.influencer = influencer;
     }
+
 
     public int getSubmissionId() {
         return submissionId;
@@ -87,6 +88,13 @@ public class Submission {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Submission(int submissionId, String url, String description, SubmissionStatus submissionStatus) {
+        this.submissionId = submissionId;
+        this.url = url;
+        this.description = description;
+        this.submissionStatus = submissionStatus;
     }
 
     public Submission(int submissionId, String url, String description, SubmissionStatus submissionStatus, Campaign campaign, Influencer influencer) {

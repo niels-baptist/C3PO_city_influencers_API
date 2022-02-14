@@ -9,7 +9,7 @@ import java.util.List;
 import static javax.persistence.CascadeType.ALL;
 
 @Entity
-@Table(name="location", schema = "nocaps")
+@Table(name="location", schema = "public")
 @JsonIgnoreProperties(value = {"users","campaigns","hibernateLazyInitializer"}, allowSetters = true)
 public class Location {
     @Id

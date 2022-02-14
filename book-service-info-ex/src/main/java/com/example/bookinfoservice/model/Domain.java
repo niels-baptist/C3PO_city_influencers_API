@@ -3,10 +3,11 @@ package com.example.bookinfoservice.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name="domain", schema = "nocaps")
+@Table(name="domain", schema = "public")
 @JsonIgnoreProperties(value = {"influencers","campaigns","hibernateLazyInitializer"}, allowSetters = true)
 public class Domain {
     @Id
@@ -20,8 +21,11 @@ public class Domain {
 
     @ManyToMany(mappedBy = "domains")
     Set<Influencer> influencers;
-    @ManyToMany(mappedBy = "domains")
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "domain")
     Set<Campaign> campaigns;
+
+
 
     public Domain() {
     }

@@ -14,4 +14,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     Employee findByEmployeeId(int employee_id);
     @Query(value="select e from Employee e where e.user.userName=?1")
     List<Employee> findAllByuserUserName(String user_email);
+    Employee findByUserEquals(User user);
+    @Query(value = "SELECT * FROM public.employee e INNER JOIN public.user u ON e.user_id = u.user_id WHERE u.location_id = ?1",nativeQuery = true)
+    List<Employee> findallUsersByLocationId(int location_id);
 }

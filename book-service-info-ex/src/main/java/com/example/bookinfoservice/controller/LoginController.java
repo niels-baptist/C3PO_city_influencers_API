@@ -51,6 +51,18 @@ public class LoginController {
         return Objects.equals(database_password, user_password);
     }
 
+    @PostMapping(value = "/employees/login/returnsId")
+    @ResponseBody
+    public int loginEmployeesWithReturn(@RequestBody Map<String, String> json) {
+        User user = userRepository.getUserByUserName(json.get("user_username"));
+        String database_password = user.getPassword();
+        if(Objects.equals(database_password, json.get("user_password"))){
+            return employeeRepository.findByUserEquals(user).getEmployeeId();
+        }else{
+            return 0;
+        }
+    }
+
 
 
     @GetMapping("/users/username/{user_name}")

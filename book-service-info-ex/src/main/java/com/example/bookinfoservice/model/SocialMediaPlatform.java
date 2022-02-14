@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name="social_media_platform", schema = "nocaps")
+@Table(name="social_media_platform", schema = "public")
 @JsonIgnoreProperties(value = {"accounts","campaigns","hibernateLazyInitializer"}, allowSetters = true)
 public class SocialMediaPlatform {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "\"social_media_platform_id\"")
-    private int social_media_platformId;
+    private int platformId;
     @Column(name = "\"name\"")
     private String name;
     @Column(name = "\"url\"")
@@ -22,11 +22,11 @@ public class SocialMediaPlatform {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "platform")
     private List<SocialMediaAccount> accounts;
 
-    @ManyToMany(mappedBy = "platforms")
+    @OneToMany(mappedBy = "socialMediaPlatform")
     Set<Campaign> campaigns;
 
     public SocialMediaPlatform(int social_media_platformId, String name, String url) {
-        this.social_media_platformId = social_media_platformId;
+        this.platformId = social_media_platformId;
         this.name = name;
         this.url = url;
     }
@@ -34,12 +34,12 @@ public class SocialMediaPlatform {
     public SocialMediaPlatform() {
     }
 
-    public int getSocial_media_platformId() {
-        return social_media_platformId;
+    public int getPlatformId() {
+        return platformId;
     }
 
-    public void setSocial_media_platformId(int social_media_platformId) {
-        this.social_media_platformId = social_media_platformId;
+    public void setPlatformId(int social_media_platformId) {
+        this.platformId = social_media_platformId;
     }
 
     public String getName() {

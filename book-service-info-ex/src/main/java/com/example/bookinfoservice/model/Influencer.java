@@ -8,7 +8,7 @@ import java.util.Set;
 
 
 @Entity
-@Table(name="influencer", schema = "nocaps")
+@Table(name="influencer", schema = "public")
 @JsonIgnoreProperties(value = {"submissions","hibernateLazyInitializer"}, allowSetters = true)
 public class Influencer {
     @Id

@@ -46,15 +46,24 @@ public class SubmissionController  {
         return submissionRepository.save(new Submission(submission.getUrl(), submission.getDescription(), submission.getSubmissionStatus(), submission.getCampaign(),submission.getInfluencer()));
     }
 
+    @GetMapping("/submissions/{submission_id}")
+    public Submission addSubmission(@PathVariable int submission_id){
+        return submissionRepository.findBySubmissionId(submission_id);
+    }
+
     @PostMapping("/submissions/{campaign_id}")
     public Submission addSubmissionToCampaign(@RequestBody Submission submission, @PathVariable int campaign_id){
         submission.setCampaign(campaignRepository.findByCampaignId(campaign_id));
-        return submissionRepository.save(new Submission(submission.getUrl(), submission.getDescription(), submission.getSubmissionStatus(), submission.getCampaign(),submission.getInfluencer()));
+        return submissionRepository.save(new Submission("placeholder-image.png", submission.getDescription(), submission.getSubmissionStatus(), submission.getCampaign(),submission.getInfluencer()));
     }
 
     @PutMapping("/submissions")
     public Submission updateSubmission(@RequestBody Submission submission){
-        return submissionRepository.save(submission);
+        Submission localSubmission = submissionRepository.findBySubmissionId(submission.getSubmissionId());
+        localSubmission.setUrl(submission.getUrl());
+        localSubmission.setDescription(submission.getDescription());
+        localSubmission.setSubmissionStatus(submission.getSubmissionStatus());
+        return submissionRepository.save(localSubmission);
     }
     @DeleteMapping("/submissions/{submission_id}")
     public void deleteSubmission(@PathVariable int submission_id){
@@ -66,30 +75,28 @@ public class SubmissionController  {
         return submissionRepository.findAllByInfluencerInfluencerId(influencer_id);
     }
 
-    @GetMapping("/submissions/{influencer_id}/{campaign_id}")public Submission getSubmissionsByInfluencerIdAndCampaignId(@PathVariable Map<String, String> json){
+    @GetMapping("/submissions/{influencer_id}/{campaign_id}")public Submission getSubmissionsByInfluencerIdAndCampaignId(@PathVariable int influencer_id, @PathVariable int campaign_id){
         // used to join a campaign and create a submission
-        int influencer_id = parseInt(json.get("influencer_id"));
-        int campaign_id = parseInt(json.get("campaign_id"));
+
         Submission submission = submissionRepository.findByInfIdAndCampId(influencer_id,campaign_id);
         if (submission == null){
             Campaign campaign = campaignRepository.findByCampaignId(campaign_id);
             Influencer influencer = influencerRepository.findByInfluencerId(influencer_id);
             if (campaign.getCampaignStatus().getStatusId() != 2){throw new ResponseStatusException(HttpStatus.FORBIDDEN,"The campaign was not open nor had the user a submission to the campaign.");}
-            submission = submissionRepository.save(new Submission("", "", submissionStatusRepository.findByStatusId(1),campaign ,influencer));
+            submission = submissionRepository.save(new Submission("placeholder-image.png", "", submissionStatusRepository.findByStatusId(1),campaign ,influencer));
         }
         return submission;
     }
 
-    @PostMapping("/submissions/{influencer_id}/{campaign_id}")public Submission createSubmissionsByInfluencerIdAndCampaignId(@PathVariable Map<String, String> json){
+    @PostMapping("/submissions/{influencer_id}/{campaign_id}")
+    public Submission createSubmissionsByInfluencerIdAndCampaignId(@PathVariable int influencer_id, @PathVariable int campaign_id){
         // used to join a campaign and create a submission
-        int influencer_id = parseInt(json.get("influencer_id"));
-        int campaign_id = parseInt(json.get("campaign_id"));
         Submission submission = submissionRepository.findByInfIdAndCampId(influencer_id,campaign_id);
         if (submission == null){
             Campaign campaign = campaignRepository.findByCampaignId(campaign_id);
             Influencer influencer = influencerRepository.findByInfluencerId(influencer_id);
             if (campaign.getCampaignStatus().getStatusId() != 2){throw new ResponseStatusException(HttpStatus.FORBIDDEN,"The campaign was not open nor had the user a submission to the campaign.");}
-            submission = submissionRepository.save(new Submission("", "", submissionStatusRepository.findByStatusId(1),campaign ,influencer));
+            submission = submissionRepository.save(new Submission("placeholder-image.png", "", submissionStatusRepository.findByStatusId(1),campaign ,influencer));
         }
         return submission;
     }

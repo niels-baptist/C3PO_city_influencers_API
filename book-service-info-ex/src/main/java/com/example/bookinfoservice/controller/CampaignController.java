@@ -1,12 +1,10 @@
 package com.example.bookinfoservice.controller;
+import com.example.bookinfoservice.Form.CampaignForm;
 import com.example.bookinfoservice.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import com.example.bookinfoservice.repository.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,9 +23,26 @@ public class CampaignController  {
     @Autowired
     SubmissionRepository submissionRepository;
 
+    @Autowired
+    EmployeeRepository employeeRepository;
+    @Autowired
+    DomainRepository domainRepository;
+    @Autowired
+    LocationRepository locationRepository;
+    @Autowired
+    CampaignStatusRepository campaignStatusRepository;
+    @Autowired
+    SocialMediaPlatformRepository socialMediaPlatformRepository;
+
+
     @GetMapping(value = "/campaigns", produces = "application/json")
     public List<Campaign> getCampaigns(){
         return campaignRepository.findAll();
+    }
+
+    @GetMapping(value = "/campaigns/location/{location_id}", produces = "application/json")
+    public List<Campaign> getCampaignsByLocationId(@PathVariable int location_id){
+        return campaignRepository.findAllByLocationId(location_id);
     }
 
     @GetMapping(value = "/campaigns/{campaign_id}", produces = "application/json")
@@ -37,16 +52,13 @@ public class CampaignController  {
     @GetMapping("/campaigns/influencer/{influencer_id}")
     public List<Campaign> getCampaignsByInfluencer(@PathVariable Integer influencer_id){
         // // This call to the data base works better with lambda functions due to the amount of association tables that would be joined in native sql
-        List<Campaign> campaigns = getRecomendedCampaignsByInfluencerId(influencer_id);
-        campaigns.addAll(getOpenCampaignsByDomains(influencer_id));
-        return campaigns.stream().distinct().collect(Collectors.toList());
+        return getOpenCampaignsByDomains(influencer_id);
     }
 
 
     @GetMapping("/campaigns/recomended/{influencer_id}")
     public List<Campaign> getRecomendedCampaignsByInfluencerId(@PathVariable Integer influencer_id){
         return campaignRepository.findAllByStatusIdAndInfluencerId(1,influencer_id,2);
-
     }
 
     @GetMapping("/campaigns/open/{influencer_id}")
@@ -59,13 +71,38 @@ public class CampaignController  {
 
     @PostMapping("/campaigns")
     public Campaign addCampaign(@RequestBody Campaign campaign){
-        return campaignRepository.save(new Campaign(campaign.getEmployee(), campaign.getName(), campaign.getDescription(), campaign.getFotoUrl(),campaign.getStartDate(),campaign.getEndDate(), campaign.getLocation(), campaign.getCampaignStatus(),campaign.getSubmissions(), campaign.getDomains(), campaign.getPlatforms()));
+        return campaignRepository.save(new Campaign(campaign.getEmployee(), campaign.getName(), campaign.getDescription(), campaign.getFotoUrl(),campaign.getStartDate(),campaign.getEndDate(), campaign.getLocation(), campaign.getCampaignStatus(),campaign.getDomain(), campaign.getSocialMediaPlatform()));
+    }
+
+    @PostMapping("/campaigns/campaignForm")
+    public Campaign addCampaignForm(@RequestBody CampaignForm campaignForm){
+        Employee employee = employeeRepository.findByEmployeeId(campaignForm.getEmployeeId());
+        Location location = locationRepository.findByLocationId(campaignForm.getLocationId());
+        CampaignStatus status = campaignStatusRepository.findByStatusId(campaignForm.getCampaignStatusId());
+        Domain domain = domainRepository.findByDomainId(campaignForm.getDomainId());
+        SocialMediaPlatform socialMediaPlatform = socialMediaPlatformRepository.findByPlatformId(campaignForm.getPlatformId());
+        Campaign campaign = campaignForm.createCampaign(employee,location,status,domain,socialMediaPlatform);
+        return campaignRepository.save(campaign);
     }
 
     @PutMapping("/campaigns")
     public Campaign updateCampaign(@RequestBody Campaign campaign){
         return campaignRepository.save(campaign);
     }
+
+    @PutMapping("/campaigns/campaignForm")
+    public Campaign updateCampaign(@RequestBody CampaignForm campaignForm){
+        Employee employee = employeeRepository.findByEmployeeId(campaignForm.getEmployeeId());
+        Location location = locationRepository.findByLocationId(campaignForm.getLocationId());
+        CampaignStatus status = campaignStatusRepository.findByStatusId(campaignForm.getCampaignStatusId());
+        Domain domain = domainRepository.findByDomainId(campaignForm.getDomainId());
+        SocialMediaPlatform socialMediaPlatform = socialMediaPlatformRepository.findByPlatformId(campaignForm.getPlatformId());
+        Campaign campaign = campaignForm.getCampaign(employee,location,status,domain,socialMediaPlatform);
+        campaign.setSubmissions(campaignRepository.findByCampaignId(campaignForm.getCampaignId()).getSubmissions());
+        return campaignRepository.save(campaign);
+    }
+
+
     @DeleteMapping(value = "/campaigns/{campaign_id}", produces = "application/json")
     public void removeCampaign(@PathVariable Integer campaign_id){
         campaignRepository.deleteById(campaign_id);
