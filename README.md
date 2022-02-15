@@ -10,5 +10,9 @@ This API is used to retrieve data from the database hosted on Azure cloud, note 
 - **Hosting**: [Azure](https://portal.azure.com/), you can visit this API [here](http://c3poapi.azurewebsites.net/)
 - **Documentation**: [Gitbook](https://project-4-0-ci-c3po.gitbook.io/c3po-docs/api/about)
 
+## Running the API locally
+- If you want to run the API locally, we suggest doing so in the [IntelliJ IDEA](https://www.jetbrains.com/idea/) IDE.
+- Make sure you have the [Spring Boot](https://projects.spring.io/spring-boot/) and [Spring Data](https://projects.spring.io/spring-data/) libraries installed.
+- You can do all of the necessary downloads using ```npm install```.
 
 
